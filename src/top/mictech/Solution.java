@@ -1,10 +1,29 @@
 package top.mictech;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Solution {
     // region 一般题
+
+    // 119. 杨辉三角 II
+    public List<Integer> getRow(int rowIndex) {
+        List<Integer> l1;
+        List<Integer> l2 = new ArrayList<>();
+        l2.add(1);
+        l1 = new ArrayList<>(l2);
+        for (int i = 0; i < rowIndex; i++) {
+            l2.clear();
+            l2.add(1);
+            for (int j = 0; j < i; j++) {
+                l2.add(l1.get(j) + l1.get(j + 1));
+            }
+            l2.add(1);
+            l1 = new ArrayList<>(l2);
+        }
+        return l1;
+    }
 
     // 78. 子集
     public List<List<Integer>> subsets(int[] nums) {
