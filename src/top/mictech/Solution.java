@@ -1,7 +1,26 @@
 package top.mictech;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Solution {
     // region 一般题
+
+    // 78. 子集
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> f = new LinkedList<>();
+        f.add(new LinkedList<>());
+        for (int i : nums) {
+            final LinkedList<LinkedList<Integer>> n = new LinkedList<>();
+            for (List<Integer> l : f) {
+                final LinkedList<Integer> b = new LinkedList<>(l);
+                b.addLast(i);
+                n.addLast(b);
+            }
+            f.addAll(n);
+        }
+        return f;
+    }
 
     // 807. 保持城市天际线
     public int maxIncreaseKeepingSkyline(int[][] grid) {
