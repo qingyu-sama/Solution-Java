@@ -1,8 +1,6 @@
 package top.mictech;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 //region 题目提供的数据结构
 
@@ -59,6 +57,20 @@ class Node {
 
 public class Solution {
     // region 一般题
+
+    // 630. 课程表 III
+    public int scheduleCourse(int[][] courses) {
+        Arrays.sort(courses, Comparator.comparingInt(a -> a[1]));
+        PriorityQueue<Integer> q = new PriorityQueue<>((a, b) -> b - a);
+        int sum = 0;
+        for (int[] c : courses) {
+            int d = c[0];
+            sum += d;
+            q.add(d);
+            if (sum > c[1]) sum -= q.poll();
+        }
+        return q.size();
+    }
 
     // 119. 杨辉三角 II
     public List<Integer> getRow(int rowIndex) {
