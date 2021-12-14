@@ -58,6 +58,43 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 8. 字符串转换整数 (atoi)
+    public int myAtoi(String s) {
+        int num = 0, n = 0, length = s.length();
+        Boolean f = null;
+        String v;
+        for (int i = 0; i < length; i++) {
+            v = s.substring(i, i + 1);
+            if (v.equalsIgnoreCase(" ") && num == 0 && f == null) {
+            } else if (v.equalsIgnoreCase("-") && f == null) {
+                f = true;
+            } else if (v.equalsIgnoreCase("+") && f == null) {
+                f = false;
+            } else if (v.equalsIgnoreCase("0") ||
+                    v.equalsIgnoreCase("1") ||
+                    v.equalsIgnoreCase("2") ||
+                    v.equalsIgnoreCase("3") ||
+                    v.equalsIgnoreCase("4") ||
+                    v.equalsIgnoreCase("5") ||
+                    v.equalsIgnoreCase("6") ||
+                    v.equalsIgnoreCase("7") ||
+                    v.equalsIgnoreCase("8") ||
+                    v.equalsIgnoreCase("9")) {
+                if (f == null) f = false;
+                n = n * 10 + Integer.parseInt(v);
+                if (n / 10 != num) {
+                    return f ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+                }
+                num = n;
+            } else {
+                if (f == null) return num;
+                return f ? -num : num;
+            }
+        }
+        if (f == null) return num;
+        return f ? -num : num;
+    }
+
     // 7. 整数反转
     public int reverse(int x) {
         if (x == 0)
