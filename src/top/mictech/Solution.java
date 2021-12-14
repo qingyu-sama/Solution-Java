@@ -58,6 +58,24 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 7. 整数反转
+    public int reverse(int x) {
+        if (x == 0)
+            return 0;
+        boolean isNegtive = false;
+        if (x < 0)
+            isNegtive = true;
+        int res = 0;
+        int num = x < 0 ? -x : x;
+        while (num != 0) {
+            if (res > (Integer.MAX_VALUE - (num % 10)) / 10)
+                return 0;
+            res = res * 10 + num % 10;
+            num /= 10;
+        }
+        return isNegtive ? -res : res;
+    }
+
     // 6. Z 字形变换
     public String convert(String s, int numRows) {
         // 排除 numRows == 1的情况,因为这样所有内容都在第一行
