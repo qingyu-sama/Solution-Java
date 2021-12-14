@@ -58,6 +58,25 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 20. 有效的括号
+    public boolean isValid(String s) {
+        if (s.length() == 0) return true;
+        Stack<Character> stack = new Stack<>();
+        Map<Character, Character> map = new HashMap<>();
+        map.put(')', '(');
+        map.put(']', '[');
+        map.put('}', '{');
+        for (char c : s.toCharArray()) {
+            if (c == '(' || c == '[' || c == '{')
+                stack.push(c);
+            else if (map.containsKey(c))
+                if (stack.empty()) return false;
+                else if (!(stack.pop() == map.get(c)))
+                    return false;
+        }
+        return stack.empty();
+    }
+
     // 14. 最长公共前缀
     public String longestCommonPrefix(String[] strs) {
         if (strs[0].length() == 0) return "";
