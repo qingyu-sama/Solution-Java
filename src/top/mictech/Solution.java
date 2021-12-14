@@ -58,6 +58,18 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 240. 搜索二维矩阵 II
+    public boolean searchMatrix(int[][] matrix, int target) {
+        for (int[] ints : matrix) {
+            for (int i = ints.length - 1; i >= 0; i--) {
+                if (target < ints[i]) ;
+                else if (ints[i] == target) return true;
+                else break;
+            }
+        }
+        return false;
+    }
+
     // 20. 有效的括号
     public boolean isValid(String s) {
         if (s.length() == 0) return true;
