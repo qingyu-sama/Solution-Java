@@ -58,6 +58,16 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 1. 两数之和
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        int i;
+        for (i = 0; i < nums.length; i++)
+            if (map.containsKey(target - nums[i])) break;
+            else map.put(nums[i], i);
+        return new int[]{map.get(target - nums[i]), i};
+    }
+
     // 79. 单词搜索
     public boolean exist(char[][] board, String word) {
         boolean[][] zt = new boolean[board.length][board[0].length];
