@@ -58,6 +58,20 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 14. 最长公共前缀
+    public String longestCommonPrefix(String[] strs) {
+        if (strs[0].length() == 0) return "";
+        if (strs.length == 1) return strs[0];
+        String str = strs[0];
+        for (int i = 0; i < strs.length; i++) {
+            if (!strs[i].startsWith(str)) {
+                str = str.substring(0, str.length() - 1);
+                i--;
+            }
+        }
+        return str;
+    }
+
     // 11. 盛最多水的容器
     public int maxArea(int[] height) {
         int n1 = 0, n2 = height.length - 1;
