@@ -58,6 +58,17 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 11. 盛最多水的容器
+    public int maxArea(int[] height) {
+        int n1 = 0, n2 = height.length - 1;
+        int size = 0;
+        while (n1 < n2)
+            size = height[n1] < height[n2] ?
+                    Math.max(size, (n2 - n1) * height[n1++]) :
+                    Math.max(size, (n2 - n1) * height[n2--]);
+        return size;
+    }
+
     // 8. 字符串转换整数 (atoi)
     public int myAtoi(String s) {
         int num = 0, n = 0, length = s.length();
