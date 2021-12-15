@@ -63,13 +63,11 @@ public class Solution {
         Map<Character, String> map = new HashMap<>();
         String[] strings = s.split(" ");
         if (pattern.length() != strings.length) return false;
-        for (int i = 0; i < strings.length; i++) {
-            String p = map.getOrDefault(pattern.charAt(i), null);
-            if (p == null)
+        for (int i = 0; i < strings.length; i++)
+            if (!map.containsKey(pattern.charAt(i)))
                 if (map.containsValue(strings[i])) return false;
                 else map.put(pattern.charAt(i), strings[i]);
-            else if (!p.equalsIgnoreCase(strings[i])) return false;
-        }
+            else if (!map.get(pattern.charAt(i)).equalsIgnoreCase(strings[i])) return false;
         return true;
     }
 
