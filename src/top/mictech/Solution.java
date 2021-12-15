@@ -112,6 +112,29 @@ public class Solution {
         return false;
     }
 
+    // 34. 在排序数组中查找元素的第一个和最后一个位置
+    public int[] searchRange(int[] nums, int target) {
+        if (nums.length == 0) return new int[]{-1, -1};
+        if (target > nums[nums.length - 1] || target < nums[0]) return new int[]{-1, -1};
+        int p1 = 0, p2 = nums.length - 1, p = 0;
+        while (p1 <= p2) {
+            p = p1 + p2 >> 1;
+            if (nums[p] == target) break;
+            if (nums[p] > target) p2 = p - 1;
+            else p1 = p + 1;
+        }
+        if (nums[p] != target) return new int[]{-1, -1};
+        p1 = p;
+        p2 = p;
+        while (p1 > 0)
+            if (nums[p1 - 1] == target) p1--;
+            else break;
+        while (p2 < nums.length - 1)
+            if (nums[p2 + 1] == target) p2++;
+            else break;
+        return new int[]{p1, p2};
+    }
+
     // 27. 移除元素
     public int removeElement(int[] nums, int val) {
         int l = nums.length - 1;
