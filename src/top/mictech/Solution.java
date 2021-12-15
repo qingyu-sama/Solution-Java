@@ -58,6 +58,20 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 153. 寻找旋转排序数组中的最小值
+    public int findMin(int[] nums) {
+        if (nums.length == 1) return nums[0];
+        if (nums[0] < nums[nums.length - 1]) return nums[0];
+        int l = 1, m = 0, r = nums.length - 1;
+        while (l <= r) {
+            m = l + r >> 1;
+            if (nums[m] < nums[m - 1]) return nums[m];
+            if (nums[m] > nums[0]) l = m + 1;
+            else r = m - 1;
+        }
+        return nums[m];
+    }
+
     // 136. 只出现一次的数字
     public int singleNumber(int[] nums) {
         int p = 0;
