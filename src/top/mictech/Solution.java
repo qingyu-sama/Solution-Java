@@ -58,6 +58,30 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 557. 反转字符串中的单词 III
+    public String reverseWords(String s) {
+        int p1, p2, p = 0;
+        char[] chars = s.toCharArray();
+        while (p < chars.length) {
+            p1 = p;
+            p2 = p1 + 1;
+            while (p2 < chars.length && chars[p2] != ' ')
+                p2++;
+            p = p2 + 1;
+            p2--;
+            while (p1 < p2) {
+                char c = chars[p1];
+                chars[p1] = chars[p2];
+                chars[p2] = c;
+                p1++;
+                p2--;
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append(chars);
+        return sb.toString();
+    }
+
     // 509. 斐波那契数
     public int fib(int n) {
         if (n <= 1) return n;
