@@ -58,6 +58,32 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 130. 被围绕的区域
+    public void solve(char[][] board) {
+        boolean[][] zt = new boolean[board.length][board[0].length];
+        int len1 = board.length - 1, len2 = board[0].length - 1;
+        for (int i = 0; i <= len1; i++) {
+            solveDFS(board, zt, i, 0);
+            solveDFS(board, zt, i, len2);
+        }
+        for (int i = 0; i <= len2; i++) {
+            solveDFS(board, zt, 0, i);
+            solveDFS(board, zt, len1, i);
+        }
+        for (int i = 0; i < len1; i++)
+            for (int j = 0; j < len2; j++)
+                if (board[i][j] == 'O' && !zt[i][j]) board[i][j] = 'X';
+    }
+
+    private void solveDFS(char[][] board, boolean[][] zt, int i, int j) {
+        if (zt[i][j] || board[i][j] == 'X') return;
+        zt[i][j] = true;
+        if (i > 0) solveDFS(board, zt, i - 1, j);
+        if (j > 0) solveDFS(board, zt, i, j - 1);
+        if (i < board.length - 1) solveDFS(board, zt, i + 1, j);
+        if (j < board[0].length - 1) solveDFS(board, zt, i, j + 1);
+    }
+
     // 75. 颜色分类
     public void sortColors(int[] nums) {
         int l = 0, r = nums.length - 1;
