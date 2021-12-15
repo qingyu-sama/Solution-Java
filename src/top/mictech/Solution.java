@@ -58,6 +58,36 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 75. 颜色分类
+    public void sortColors(int[] nums) {
+        int l = 0, r = nums.length - 1;
+        for (int i = 0; i <= r; i++) {
+            if (nums[r] == 2) {
+                r--;
+                i--;
+                continue;
+            }
+            if (nums[l] == 0) {
+                l++;
+                continue;
+            }
+            if (nums[l] != 0 && nums[r] != 2) {
+                if (nums[i] == 2) {
+                    int t = nums[r];
+                    nums[r] = nums[i];
+                    nums[i] = t;
+                    r--;
+                }
+                if (nums[i] == 0) {
+                    int t = nums[i];
+                    nums[i] = nums[l];
+                    nums[l] = t;
+                    l++;
+                }
+            }
+        }
+    }
+
     // 409. 最长回文串
     public int longestPalindrome(String s) {
         int[] ints = new int[128];
