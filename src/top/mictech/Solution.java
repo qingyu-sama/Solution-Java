@@ -58,6 +58,26 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 283. 移动零
+    public void moveZeroes(int[] nums) {
+        int p1 = 0, p2;
+        while (p1 < nums.length) {
+            if (nums[p1] == 0) {
+                p2 = p1 + 1;
+                while (p2 < nums.length) {
+                    if (nums[p2] != 0) {
+                        nums[p1] = nums[p2];
+                        nums[p2] = 0;
+                        break;
+                    }
+                    p2++;
+                }
+                if (p2 == nums.length) return;
+            }
+            p1++;
+        }
+    }
+
     // 217. 存在重复元素
     public boolean containsDuplicate(int[] nums) {
         Set<Integer> set = new HashSet<>();
