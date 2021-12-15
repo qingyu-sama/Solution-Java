@@ -112,6 +112,18 @@ public class Solution {
         return false;
     }
 
+    // 27. 移除元素
+    public int removeElement(int[] nums, int val) {
+        int l = nums.length - 1;
+        for (int i = nums.length - 1; i >= 0; i--) {
+            if (nums[i] == val) {
+                nums[i] = nums[l];
+                l--;
+            }
+        }
+        return l + 1;
+    }
+
     // 26. 删除有序数组中的重复项
     public int removeDuplicates(int[] nums) {
         int l = 0;
