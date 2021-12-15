@@ -112,6 +112,31 @@ public class Solution {
         return false;
     }
 
+    // 35. 搜索插入位置
+    public int searchInsert(int[] nums, int target) {
+        if (nums.length == 1) return nums[0] < target ? 1 : 0;
+        int left = 0, right = nums.length - 1, p, length = right;
+        while (left <= right) {
+            p = left + right >> 1;
+            if (nums[p] == target)
+                return p;
+            else if (nums[p] > target) {
+                if (p == 0)
+                    return 0;
+                else if (nums[p - 1] < target)
+                    return p;
+                right = p - 1;
+            } else if (nums[0] < target) {
+                if (p == length)
+                    return p + 1;
+                else if (nums[p + 1] > target)
+                    return p + 1;
+                left = p + 1;
+            }
+        }
+        return -1;
+    }
+
     // 34. 在排序数组中查找元素的第一个和最后一个位置
     public int[] searchRange(int[] nums, int target) {
         if (nums.length == 0) return new int[]{-1, -1};
