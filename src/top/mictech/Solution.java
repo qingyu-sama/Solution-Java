@@ -58,6 +58,17 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 509. 斐波那契数
+    public int fib(int n) {
+        if (n <= 1) return n;
+        int p1 = 0, p2 = 1;
+        for (int i = 1; i < n; i++) {
+            p2 += p1;
+            p1 = p2 - p1;
+        }
+        return p2;
+    }
+
     // 496. 下一个更大元素 I
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
         Map<Integer, Integer> map = new HashMap<>();
