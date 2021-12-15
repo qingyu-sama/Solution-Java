@@ -112,6 +112,18 @@ public class Solution {
         return false;
     }
 
+    // 26. 删除有序数组中的重复项
+    public int removeDuplicates(int[] nums) {
+        int l = 0;
+        for (int n : nums) {
+            if (n != nums[l]) {
+                l++;
+                nums[l] = n;
+            }
+        }
+        return l + 1;
+    }
+
     // 33. 搜索旋转排序数组
     public int search(int[] nums, int target) {
         int l = 0, m, r = nums.length - 1;
