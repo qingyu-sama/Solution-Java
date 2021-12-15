@@ -58,6 +58,14 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 217. 存在重复元素
+    public boolean containsDuplicate(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        for (int i : nums)
+            if (!set.add(i)) return true;
+        return false;
+    }
+
     // 200. 岛屿数量
     public int numIslands(char[][] grid) {
         int count = 0;
