@@ -77,9 +77,7 @@ public class Solution {
                 p2--;
             }
         }
-        StringBuilder sb = new StringBuilder();
-        sb.append(chars);
-        return sb.toString();
+        return String.valueOf(chars);
     }
 
     // 509. 斐波那契数
