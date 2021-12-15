@@ -58,6 +58,18 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 409. 最长回文串
+    public int longestPalindrome(String s) {
+        int[] ints = new int[128];
+        int len = s.length();
+        for (int i = 0; i < len; i++)
+            ints[s.charAt(i)]++;
+        int c = 0;
+        for (int i : ints)
+            if (i % 2 == 1) c++;
+        return c == 0 ? len : len - c + 1;
+    }
+
     // 290. 单词规律
     public boolean wordPattern(String pattern, String s) {
         Map<Character, String> map = new HashMap<>();
