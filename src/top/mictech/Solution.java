@@ -58,6 +58,21 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 290. 单词规律
+    public boolean wordPattern(String pattern, String s) {
+        Map<Character, String> map = new HashMap<>();
+        String[] strings = s.split(" ");
+        if (pattern.length() != strings.length) return false;
+        for (int i = 0; i < strings.length; i++) {
+            String p = map.getOrDefault(pattern.charAt(i), null);
+            if (p == null)
+                if (map.containsValue(strings[i])) return false;
+                else map.put(pattern.charAt(i), strings[i]);
+            else if (!p.equalsIgnoreCase(strings[i])) return false;
+        }
+        return true;
+    }
+
     // 415. 字符串相加
     public String addStrings(String num1, String num2) {
         StringBuilder sb = new StringBuilder();
