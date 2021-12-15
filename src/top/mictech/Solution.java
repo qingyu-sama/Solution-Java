@@ -112,6 +112,16 @@ public class Solution {
         return false;
     }
 
+    // 53. 最大子数组和
+    public int maxSubArray(int[] nums) {
+        int pre = 0, maxAns = nums[0];
+        for (int x : nums) {
+            pre = Math.max(pre + x, x);
+            maxAns = Math.max(maxAns, pre);
+        }
+        return maxAns;
+    }
+
     // 35. 搜索插入位置
     public int searchInsert(int[] nums, int target) {
         if (nums.length == 1) return nums[0] < target ? 1 : 0;
