@@ -58,6 +58,18 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 344. 反转字符串
+    public void reverseString(char[] s) {
+        int p1 = 0, p2 = s.length - 1;
+        while (p1 < p2) {
+            char c = s[p1];
+            s[p1] = s[p2];
+            s[p2] = c;
+            p1++;
+            p2--;
+        }
+    }
+
     // 283. 移动零
     public void moveZeroes(int[] nums) {
         int p1 = 0, p2;
