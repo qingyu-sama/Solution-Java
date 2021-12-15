@@ -58,6 +58,31 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 496. 下一个更大元素 I
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        Map<Integer, Integer> map = new HashMap<>();
+        int length1 = nums1.length;
+        int length2 = nums2.length;
+        for (int i = 0; i < length2; i++)
+            map.put(nums2[i], i);
+        int l, n, s;
+        for (int i = 0; i < length1; i++) {
+            n = nums1[i];
+            l = map.get(n) + 1;
+            while (l < length2) {
+                s = nums2[l];
+                if (s > n) {
+                    n = s;
+                    break;
+                }
+                l++;
+            }
+            if (n == nums1[i]) nums1[i] = -1;
+            else nums1[i] = n;
+        }
+        return nums1;
+    }
+
     // 492. 构造矩形
     public int[] constructRectangle(int area) {
         int w = (int) Math.sqrt(area);
