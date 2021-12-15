@@ -58,6 +58,16 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 492. 构造矩形
+    public int[] constructRectangle(int area) {
+        int w = (int) Math.sqrt(area);
+        while (area % w != 0) w--;
+        int[] n = new int[2];
+        n[0] = area / w;
+        n[1] = w;
+        return n;
+    }
+
     // 350. 两个数组的交集 II
     public int[] intersect(int[] nums1, int[] nums2) {
         if (nums1.length > nums2.length)
