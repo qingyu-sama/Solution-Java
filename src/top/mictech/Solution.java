@@ -112,6 +112,21 @@ public class Solution {
         return false;
     }
 
+    // 66. 加一
+    public int[] plusOne(int[] digits) {
+        for (int i = digits.length - 1; i >= 0; i--) {
+            if (digits[i] != 9) {
+                digits[i]++;
+                return digits;
+            } else {
+                digits[i] = 0;
+            }
+        }
+        int[] nums = new int[digits.length + 1];
+        nums[0] = 1;
+        return nums;
+    }
+
     // 53. 最大子数组和
     public int maxSubArray(int[] nums) {
         int pre = 0, maxAns = nums[0];
