@@ -58,6 +58,24 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 189. 轮转数组
+    public void rotate(int[] nums, int k) {
+        k %= nums.length;
+        reverse(nums, 0, nums.length - 1);
+        reverse(nums, 0, k - 1);
+        reverse(nums, k, nums.length - 1);
+    }
+
+    private void reverse(int[] nums, int start, int end) {
+        while (start < end) {
+            nums[start] = nums[start] ^ nums[end];
+            nums[end] = nums[end] ^ nums[start];
+            nums[start] = nums[start] ^ nums[end];
+            start += 1;
+            end -= 1;
+        }
+    }
+
     // 169. 多数元素
     public int majorityElement(int[] nums) {
         int m = nums[0];
