@@ -58,6 +58,21 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 169. 多数元素
+    public int majorityElement(int[] nums) {
+        int m = nums[0];
+        int vc = 0;
+        for (int num : nums) {
+            if (num == m) vc++;
+            else vc--;
+            if (vc == 0) {
+                m = num;
+                vc = 1;
+            }
+        }
+        return m;
+    }
+
     // 153. 寻找旋转排序数组中的最小值
     public int findMin(int[] nums) {
         if (nums.length == 1) return nums[0];
