@@ -58,6 +58,31 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 350. 两个数组的交集 II
+    public int[] intersect(int[] nums1, int[] nums2) {
+        if (nums1.length > nums2.length)
+            return intersect(nums2, nums1);
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i : nums1) {
+            int count = map.getOrDefault(i, 0) + 1;
+            map.put(i, count);
+        }
+        int[] nums = new int[nums1.length];
+        int p = 0;
+        for (int i : nums2) {
+            int c = map.getOrDefault(i, 0);
+            if (c > 0) {
+                nums[p++] = i;
+                c--;
+                if (c > 0)
+                    map.put(i, c);
+                else
+                    map.remove(i);
+            }
+        }
+        return Arrays.copyOfRange(nums, 0, p);
+    }
+
     // 344. 反转字符串
     public void reverseString(char[] s) {
         int p1 = 0, p2 = s.length - 1;
