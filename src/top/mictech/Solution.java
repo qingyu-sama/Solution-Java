@@ -993,3 +993,43 @@ public class Solution {
 
     // endregion
 }
+
+// region 数据结构设计题
+
+// 剑指 Offer 09. 用两个栈实现队列
+class CQueue {
+    private MyQueue head;
+    private MyQueue boot;
+
+    public CQueue() {
+    }
+
+    public void appendTail(int value) {
+        if (head == null) {
+            head = new MyQueue(value, null);
+            boot = head;
+            return;
+        }
+        boot.next = new MyQueue(value, null);
+        boot = boot.next;
+    }
+
+    public int deleteHead() {
+        if (head == null) return -1;
+        int i = head.val;
+        head = head.next;
+        return i;
+    }
+
+    class MyQueue {
+        int val;
+        MyQueue next;
+
+        public MyQueue(int val, MyQueue next) {
+            this.val = val;
+            this.next = next;
+        }
+    }
+}
+
+// endregion
