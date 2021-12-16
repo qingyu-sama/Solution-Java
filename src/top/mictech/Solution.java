@@ -58,6 +58,18 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 704. 二分查找
+    public int search(int[] nums, int target) {
+        int l = 0, m, r = nums.length - 1;
+        while (l <= r) {
+            m = l + r >> 1;
+            if (nums[m] == target) return m;
+            else if (nums[m] > target) r = m - 1;
+            else l = m + 1;
+        }
+        return -1;
+    }
+
     // 695. 岛屿的最大面积
     public int maxAreaOfIsland(int[][] grid) {
         int size = 0;
@@ -521,7 +533,7 @@ public class Solution {
     }
 
     // 33. 搜索旋转排序数组
-    public int search(int[] nums, int target) {
+    public int searchRotate(int[] nums, int target) {
         int l = 0, m, r = nums.length - 1;
         while (l <= r) {
             m = l + r >> 1;
