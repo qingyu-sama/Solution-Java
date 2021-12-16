@@ -58,6 +58,22 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 739. 每日温度
+    public int[] dailyTemperatures(int[] temperatures) {
+        int[] ns = new int[temperatures.length];
+        CN:
+        for (int i = 0; i < ns.length; i++) {
+            for (int j = i + 1; j < ns.length; j++) {
+                if (temperatures[j] > temperatures[i]) {
+                    ns[i] = j - i;
+                    continue CN;
+                }
+                ns[i] = 0;
+            }
+        }
+        return ns;
+    }
+
     // 733. 图像渲染
     public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
         floodFillDFS(image, sr, sc, image[sr][sc], newColor);
