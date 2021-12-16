@@ -58,6 +58,16 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 1518. 换酒问题
+    public int numWaterBottles(int numBottles, int numExchange) {
+        int bottles = numBottles;
+        while (numBottles >= numExchange) {
+            bottles += numBottles / numExchange;
+            numBottles = numBottles / numExchange + numBottles % numExchange;
+        }
+        return bottles;
+    }
+
     // 1137. 第 N 个泰波那契数
     public int tribonacci(int n) {
         if (n <= 1) return n;
