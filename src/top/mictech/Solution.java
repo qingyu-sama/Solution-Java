@@ -58,6 +58,23 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 977. 有序数组的平方
+    public int[] sortedSquares(int[] nums) {
+        int p1 = 0, p2 = nums.length - 1, len = nums.length;
+        int[] ns = new int[nums.length];
+        while (p1 <= p2) {
+            len--;
+            if (Math.abs(nums[p1]) > Math.abs(nums[p2])) {
+                ns[len] = nums[p1] * nums[p1];
+                p1++;
+            } else {
+                ns[len] = nums[p2] * nums[p2];
+                p2--;
+            }
+        }
+        return ns;
+    }
+
     // 844. 比较含退格的字符串
     public boolean backspaceCompare(String s, String t) {
         Stack<Character> s1 = new Stack<>();
