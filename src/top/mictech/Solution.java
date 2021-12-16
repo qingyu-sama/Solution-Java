@@ -58,6 +58,19 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 1137. 第 N 个泰波那契数
+    public int tribonacci(int n) {
+        if (n <= 1) return n;
+        if (n == 2) return 1;
+        int p1 = 0, p2 = 1, p3 = 1;
+        for (int i = 2; i < n; i++) {
+            p3 = p3 + p2 + p1;
+            p2 = p3 - p2 - p1;
+            p1 = p3 - p2 - p1;
+        }
+        return p3;
+    }
+
     // 977. 有序数组的平方
     public int[] sortedSquares(int[] nums) {
         int p1 = 0, p2 = nums.length - 1, len = nums.length;
