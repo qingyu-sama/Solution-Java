@@ -58,6 +58,25 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 695. 岛屿的最大面积
+    public int maxAreaOfIsland(int[][] grid) {
+        int size = 0;
+        for (int i = 0; i < grid.length; i++)
+            for (int j = 0; j < grid[i].length; j++)
+                if (grid[i][j] == 1) size = Math.max(size, findGrid(grid, i, j));
+        return size;
+    }
+
+    private int findGrid(int[][] grid, int p1, int p2) {
+        if (p1 < 0 || p1 > grid.length - 1 || p2 < 0 || p2 > grid[0].length - 1) return 0;
+        if (grid[p1][p2]-- == 1)
+            return 1 + findGrid(grid, p1 - 1, p2) +
+                    findGrid(grid, p1, p2 - 1) +
+                    findGrid(grid, p1 + 1, p2) +
+                    findGrid(grid, p1, p2 + 1);
+        return 0;
+    }
+
     // 566. 重塑矩阵
     public int[][] matrixReshape(int[][] mat, int r, int c) {
         if (mat.length * mat[0].length != r * c) return mat;
