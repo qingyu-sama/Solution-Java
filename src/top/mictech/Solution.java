@@ -58,6 +58,37 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 748. 最短补全词
+    public String shortestCompletingWord(String licensePlate, String[] words) {
+        Map<Character, Integer> map = shortestCompletingWord(licensePlate);
+        String str = null;
+        for (String s : words)
+            if (shortestCompletingWord(map, s))
+                str = str == null ? s : s.length() < str.length() ? s : str;
+        return str;
+    }
+
+    private Map<Character, Integer> shortestCompletingWord(String licensePlate) {
+        Map<Character, Integer> map = new HashMap<>();
+        for (char c : licensePlate.toCharArray()) {
+            if (c >= 'A' && c <= 'Z') c += 32;
+            if (c >= 'a' && c <= 'z')
+                map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+        return map;
+    }
+
+    private boolean shortestCompletingWord(Map<Character, Integer> map, String word) {
+        Map<Character, Integer> m = new HashMap<>();
+        for (char c : word.toCharArray()) {
+            if (c >= 'A' && c <= 'Z') c += 32;
+            m.put(c, m.getOrDefault(c, 0) + 1);
+        }
+        for (Map.Entry<Character, Integer> entry : map.entrySet())
+            if (m.getOrDefault(entry.getKey(), 0) < entry.getValue()) return false;
+        return true;
+    }
+
     // 746. 使用最小花费爬楼梯
     public int minCostClimbingStairs(int[] cost) {
         int p1 = 0, p2 = 0, g;
