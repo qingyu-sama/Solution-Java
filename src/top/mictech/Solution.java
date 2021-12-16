@@ -58,6 +58,15 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 1816. 截断句子
+    public String truncateSentence(String s, int k) {
+        StringBuilder sb = new StringBuilder();
+        for (char c : s.toCharArray())
+            if (c == ' ' && k-- == 1) break;
+            else sb.append(c);
+        return sb.toString();
+    }
+
     // 1518. 换酒问题
     public int numWaterBottles(int numBottles, int numExchange) {
         int bottles = numBottles;
