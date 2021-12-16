@@ -58,6 +58,22 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 844. 比较含退格的字符串
+    public boolean backspaceCompare(String s, String t) {
+        Stack<Character> s1 = new Stack<>();
+        Stack<Character> t1 = new Stack<>();
+        for (char c : s.toCharArray())
+            if (c != '#') s1.push(c);
+            else if (!s1.empty()) s1.pop();
+        for (char c : t.toCharArray())
+            if (c != '#') t1.push(c);
+            else if (!t1.empty()) t1.pop();
+        if (s1.size() != t1.size()) return false;
+        while (!s1.empty() && !t1.empty())
+            if (s1.pop() != t1.pop()) return false;
+        return s1.empty() && t1.empty();
+    }
+
     // 797. 所有可能的路径
     public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
         List<List<Integer>> a = new ArrayList<>();
