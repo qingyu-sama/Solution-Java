@@ -58,6 +58,22 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 797. 所有可能的路径
+    public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
+        List<List<Integer>> a = new ArrayList<>();
+        LinkedList<Integer> z = new LinkedList<>();
+        allPathsSourceTargetDFS(graph, a, 0, z);
+        return a;
+    }
+
+    private void allPathsSourceTargetDFS(int[][] graph, List<List<Integer>> a, int p, LinkedList<Integer> z) {
+        z.addLast(p);
+        for (int i : graph[p])
+            allPathsSourceTargetDFS(graph, a, i, z);
+        if (p == graph.length - 1) a.add(new ArrayList<>(z));
+        z.removeLast();
+    }
+
     // 748. 最短补全词
     public String shortestCompletingWord(String licensePlate, String[] words) {
         Map<Character, Integer> map = shortestCompletingWord(licensePlate);
