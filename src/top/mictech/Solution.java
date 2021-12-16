@@ -58,6 +58,16 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 709. 转换成小写字母
+    public String toLowerCase(String s) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            sb.append(c >= 'A' && c <= 'Z' ? (char) (c + 32) : c);
+        }
+        return sb.toString();
+    }
+
     // 704. 二分查找
     public int search(int[] nums, int target) {
         int l = 0, m, r = nums.length - 1;
