@@ -58,6 +58,17 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 746. 使用最小花费爬楼梯
+    public int minCostClimbingStairs(int[] cost) {
+        int p1 = 0, p2 = 0, g;
+        for (int i = 2; i <= cost.length; i++) {
+            g = Math.min(p1 + cost[i - 2], p2 + cost[i - 1]);
+            p1 = p2;
+            p2 = g;
+        }
+        return p2;
+    }
+
     // 739. 每日温度
     public int[] dailyTemperatures(int[] temperatures) {
         int[] ns = new int[temperatures.length];
