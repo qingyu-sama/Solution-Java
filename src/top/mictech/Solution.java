@@ -58,6 +58,24 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 566. 重塑矩阵
+    public int[][] matrixReshape(int[][] mat, int r, int c) {
+        if (mat.length * mat[0].length != r * c) return mat;
+        int[][] nums = new int[r][c];
+        int p1 = 0, p2 = 0;
+        for (int[] is : mat) {
+            for (int i : is) {
+                if (p2 == c) {
+                    p1++;
+                    p2 = 0;
+                }
+                nums[p1][p2] = i;
+                p2++;
+            }
+        }
+        return nums;
+    }
+
     // 557. 反转字符串中的单词 III
     public String reverseWords(String s) {
         int p1, p2, p = 0;
