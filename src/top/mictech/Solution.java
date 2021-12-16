@@ -58,6 +58,22 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 733. 图像渲染
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        floodFillDFS(image, sr, sc, image[sr][sc], newColor);
+        return image;
+    }
+
+    private void floodFillDFS(int[][] image, int p1, int p2, int t, int n) {
+        if (p1 < 0 || p2 < 0 || p1 > image.length - 1 || p2 > image[0].length - 1 || image[p1][p2] != t || image[p1][p2] == n)
+            return;
+        image[p1][p2] = n;
+        floodFillDFS(image, p1 - 1, p2, t, n);
+        floodFillDFS(image, p1, p2 - 1, t, n);
+        floodFillDFS(image, p1 + 1, p2, t, n);
+        floodFillDFS(image, p1, p2 + 1, t, n);
+    }
+
     // 709. 转换成小写字母
     public String toLowerCase(String s) {
         StringBuilder sb = new StringBuilder();
