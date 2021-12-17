@@ -58,6 +58,31 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 46. 全排列
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> lists = new LinkedList<>();
+        LinkedList<Integer> list = new LinkedList<>();
+        boolean[] bs = new boolean[nums.length];
+        for (int i = 0; i < nums.length; i++)
+            permute(nums, i, bs, list, lists);
+        return lists;
+    }
+
+    private void permute(int[] nums, int p, boolean[] bs, LinkedList<Integer> ls, List<List<Integer>> lists) {
+        ls.addLast(nums[p]);
+        bs[p] = true;
+        if (ls.size() == nums.length) {
+            lists.add(new LinkedList<>(ls));
+            ls.removeLast();
+            bs[p] = false;
+            return;
+        }
+        for (int i = 0; i < nums.length; i++)
+            if (!bs[i]) permute(nums, i, bs, ls, lists);
+        bs[p] = false;
+        ls.removeLast();
+    }
+
     // 剑指 Offer 58 - II. 左旋转字符串
     public String reverseLeftWords(String s, int n) {
         return s.substring(n) + s.substring(0, n);
