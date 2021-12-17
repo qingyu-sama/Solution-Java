@@ -58,6 +58,26 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 39. 组合总和(未完成)
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> lists = new LinkedList<>();
+        LinkedList<Integer> list = new LinkedList<>();
+        boolean[] bs = new boolean[candidates.length];
+        for (int i : candidates)
+            combinationSum(candidates, i, 0, target, list, lists);
+        return lists;
+    }
+
+    private void combinationSum(int[] is, int p, int s, int t, LinkedList<Integer> ls, List<List<Integer>> lists) {
+        ls.addLast(p);
+        if (s == t)
+            lists.add(new LinkedList<>(ls));
+        else if (s < t)
+            for (int i : is)
+                combinationSum(is, i, s + i, t, ls, lists);
+        ls.removeLast();
+    }
+
     // 46. 全排列
     public List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> lists = new LinkedList<>();
