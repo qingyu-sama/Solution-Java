@@ -6,7 +6,7 @@ import java.util.*;
 
 class ListNode {
     ListNode next;
-    private int val;
+    int val;
 
     ListNode(int x) {
         val = x;
@@ -57,6 +57,28 @@ class Node {
 
 public class Solution {
     // region 一般题
+
+    // 2. 两数相加
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode listNode = new ListNode(0);
+        ListNode l = listNode;
+        int c = 0;
+        c += l1.val + l2.val;
+        l.val = c % 10;
+        c /= 10;
+        l1 = l1.next;
+        l2 = l2.next;
+        while (l1 != null || l2 != null || c != 0) {
+            c += l1 == null ? 0 : l1.val;
+            c += l2 == null ? 0 : l2.val;
+            l.next = new ListNode(c % 10);
+            l = l.next;
+            c /= 10;
+            if (l1 != null) l1 = l1.next;
+            if (l2 != null) l2 = l2.next;
+        }
+        return listNode;
+    }
 
     // 419. 甲板上的战舰
     public int countBattleships(char[][] board) {
