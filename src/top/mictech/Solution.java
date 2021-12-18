@@ -6,7 +6,7 @@ import java.util.*;
 
 class ListNode {
     ListNode next;
-    private int val;
+    int val;
 
     ListNode(int x) {
         val = x;
@@ -57,6 +57,52 @@ class Node {
 
 public class Solution {
     // region 一般题
+
+    // 2. 两数相加
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode listNode = new ListNode(0);
+        ListNode l = listNode;
+        int c = 0;
+        c += l1.val + l2.val;
+        l.val = c % 10;
+        c /= 10;
+        l1 = l1.next;
+        l2 = l2.next;
+        while (l1 != null || l2 != null || c != 0) {
+            c += l1 == null ? 0 : l1.val;
+            c += l2 == null ? 0 : l2.val;
+            l.next = new ListNode(c % 10);
+            l = l.next;
+            c /= 10;
+            if (l1 != null) l1 = l1.next;
+            if (l2 != null) l2 = l2.next;
+        }
+        return listNode;
+    }
+
+    // 419. 甲板上的战舰
+    public int countBattleships(char[][] board) {
+        /*DFS解法代码
+        int c = 0;
+        for (int i = 0; i < board.length; i++)
+            for (int j = 0; j < board[0].length; j++)
+                if (board[i][j] == 'X' && c++ >= 0) countBattleshipsDFS(board, i, j);
+        return c;
+         */
+        int c = 0;
+        for (int i = 0; i < board.length; i++)
+            for (int j = 0; j < board[0].length; j++)
+                if (!(i > 0 && board[i - 1][j] == 'X' || j > 0 && board[i][j - 1] == 'X') && board[i][j] == 'X') c++;
+        return c;
+    }
+
+    private void countBattleshipsDFS(char[][] board, int p1, int p2) {
+        board[p1][p2] = '.';
+        if (p1 > 0 && board[p1 - 1][p2] == 'X') countBattleshipsDFS(board, p1 - 1, p2);
+        if (p2 > 0 && board[p1][p2 - 1] == 'X') countBattleshipsDFS(board, p1, p2 - 1);
+        if (p1 < board.length - 1 && board[p1 + 1][p2] == 'X') countBattleshipsDFS(board, p1 + 1, p2);
+        if (p2 < board[0].length - 1 && board[p1][p2 + 1] == 'X') countBattleshipsDFS(board, p1, p2 + 1);
+    }
 
     // 39. 组合总和(未完成)
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
