@@ -58,6 +58,17 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 1005. K 次取反后最大化的数组和
+    public int largestSumAfterKNegations(int[] nums, int k) {
+        Arrays.sort(nums);
+        int min = 0;
+        for (int i = 0; i < k; i++)
+            if ((nums[min] = -nums[min]) == nums[min] && min < nums.length - 1 && nums[min] >= nums[min + 1]) min++;
+        int s = 0;
+        for (int i : nums) s += i;
+        return s;
+    }
+
     // 506. 相对名次
     public String[] findRelativeRanks(int[] score) {
         int[] val = Arrays.copyOf(score, score.length);
