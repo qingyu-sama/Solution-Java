@@ -2,6 +2,12 @@ package top.mictech;
 
 import java.util.*;
 
+class test {
+    public static void main(String[] args) {
+
+    }
+}
+
 //region 题目提供的数据结构
 
 class ListNode {
@@ -57,6 +63,17 @@ class Node {
 
 public class Solution {
     // region 一般题
+
+    // 383. 赎金信
+    public boolean canConstruct(String ransomNote, String magazine) {
+        if (magazine.length() < ransomNote.length()) return false;
+        int[] magazines = new int[26];
+        for (int i = 0; i < magazine.length(); i++)
+            magazines[magazine.charAt(i) - 97]++;
+        for (int i = 0; i < ransomNote.length(); i++)
+            if (--magazines[ransomNote.charAt(i) - 97] < 0) return false;
+        return true;
+    }
 
     // 1005. K 次取反后最大化的数组和
     public int largestSumAfterKNegations(int[] nums, int k) {
