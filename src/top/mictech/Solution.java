@@ -6,7 +6,7 @@ import java.util.*;
 
 class ListNode {
     ListNode next;
-    int val;
+    private int val;
 
     ListNode(int x) {
         val = x;
@@ -58,50 +58,279 @@ class Node {
 public class Solution {
     // region 一般题
 
-    // 2. 两数相加
-    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode listNode = new ListNode(0);
-        ListNode l = listNode;
-        int c = 0;
-        c += l1.val + l2.val;
-        l.val = c % 10;
-        c /= 10;
-        l1 = l1.next;
-        l2 = l2.next;
-        while (l1 != null || l2 != null || c != 0) {
-            c += l1 == null ? 0 : l1.val;
-            c += l2 == null ? 0 : l2.val;
-            l.next = new ListNode(c % 10);
-            l = l.next;
-            c /= 10;
-            if (l1 != null) l1 = l1.next;
-            if (l2 != null) l2 = l2.next;
+    // 39. 组合总和(未完成)
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> lists = new LinkedList<>();
+        LinkedList<Integer> list = new LinkedList<>();
+        boolean[] bs = new boolean[candidates.length];
+        for (int i : candidates)
+            combinationSum(candidates, i, 0, target, list, lists);
+        return lists;
+    }
+
+    private void combinationSum(int[] is, int p, int s, int t, LinkedList<Integer> ls, List<List<Integer>> lists) {
+        ls.addLast(p);
+        if (s == t)
+            lists.add(new LinkedList<>(ls));
+        else if (s < t)
+            for (int i : is)
+                combinationSum(is, i, s + i, t, ls, lists);
+        ls.removeLast();
+    }
+
+    // 46. 全排列
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> lists = new LinkedList<>();
+        LinkedList<Integer> list = new LinkedList<>();
+        boolean[] bs = new boolean[nums.length];
+        for (int i = 0; i < nums.length; i++)
+            permute(nums, i, bs, list, lists);
+        return lists;
+    }
+
+    private void permute(int[] nums, int p, boolean[] bs, LinkedList<Integer> ls, List<List<Integer>> lists) {
+        ls.addLast(nums[p]);
+        bs[p] = true;
+        if (ls.size() == nums.length) {
+            lists.add(new LinkedList<>(ls));
+            ls.removeLast();
+            bs[p] = false;
+            return;
         }
-        return listNode;
+        for (int i = 0; i < nums.length; i++)
+            if (!bs[i]) permute(nums, i, bs, ls, lists);
+        bs[p] = false;
+        ls.removeLast();
     }
 
-    // 419. 甲板上的战舰
-    public int countBattleships(char[][] board) {
-        /*DFS解法代码
-        int c = 0;
-        for (int i = 0; i < board.length; i++)
-            for (int j = 0; j < board[0].length; j++)
-                if (board[i][j] == 'X' && c++ >= 0) countBattleshipsDFS(board, i, j);
-        return c;
-         */
-        int c = 0;
-        for (int i = 0; i < board.length; i++)
-            for (int j = 0; j < board[0].length; j++)
-                if (!(i > 0 && board[i - 1][j] == 'X' || j > 0 && board[i][j - 1] == 'X') && board[i][j] == 'X') c++;
-        return c;
+    // 剑指 Offer 58 - II. 左旋转字符串
+    public String reverseLeftWords(String s, int n) {
+        return s.substring(n) + s.substring(0, n);
     }
 
-    private void countBattleshipsDFS(char[][] board, int p1, int p2) {
-        board[p1][p2] = '.';
-        if (p1 > 0 && board[p1 - 1][p2] == 'X') countBattleshipsDFS(board, p1 - 1, p2);
-        if (p2 > 0 && board[p1][p2 - 1] == 'X') countBattleshipsDFS(board, p1, p2 - 1);
-        if (p1 < board.length - 1 && board[p1 + 1][p2] == 'X') countBattleshipsDFS(board, p1 + 1, p2);
-        if (p2 < board[0].length - 1 && board[p1][p2 + 1] == 'X') countBattleshipsDFS(board, p1, p2 + 1);
+    // 剑指 Offer 05. 替换空格
+    public String replaceSpace(String s) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == ' ') sb.append("%20");
+            else sb.append(c);
+        }
+        return sb.toString();
+    }
+
+    // 1816. 截断句子
+    public String truncateSentence(String s, int k) {
+        StringBuilder sb = new StringBuilder();
+        for (char c : s.toCharArray())
+            if (c == ' ' && k-- == 1) break;
+            else sb.append(c);
+        return sb.toString();
+    }
+
+    // 1518. 换酒问题
+    public int numWaterBottles(int numBottles, int numExchange) {
+        int bottles = numBottles;
+        while (numBottles >= numExchange) {
+            bottles += numBottles / numExchange;
+            numBottles = numBottles / numExchange + numBottles % numExchange;
+        }
+        return bottles;
+    }
+
+    // 1137. 第 N 个泰波那契数
+    public int tribonacci(int n) {
+        if (n <= 1) return n;
+        if (n == 2) return 1;
+        int p1 = 0, p2 = 1, p3 = 1;
+        for (int i = 2; i < n; i++) {
+            p3 = p3 + p2 + p1;
+            p2 = p3 - p2 - p1;
+            p1 = p3 - p2 - p1;
+        }
+        return p3;
+    }
+
+    // 977. 有序数组的平方
+    public int[] sortedSquares(int[] nums) {
+        int p1 = 0, p2 = nums.length - 1, len = nums.length;
+        int[] ns = new int[nums.length];
+        while (p1 <= p2) {
+            len--;
+            if (Math.abs(nums[p1]) > Math.abs(nums[p2])) {
+                ns[len] = nums[p1] * nums[p1];
+                p1++;
+            } else {
+                ns[len] = nums[p2] * nums[p2];
+                p2--;
+            }
+        }
+        return ns;
+    }
+
+    // 844. 比较含退格的字符串
+    public boolean backspaceCompare(String s, String t) {
+        Stack<Character> s1 = new Stack<>();
+        Stack<Character> t1 = new Stack<>();
+        for (char c : s.toCharArray())
+            if (c != '#') s1.push(c);
+            else if (!s1.empty()) s1.pop();
+        for (char c : t.toCharArray())
+            if (c != '#') t1.push(c);
+            else if (!t1.empty()) t1.pop();
+        if (s1.size() != t1.size()) return false;
+        while (!s1.empty() && !t1.empty())
+            if (s1.pop() != t1.pop()) return false;
+        return s1.empty() && t1.empty();
+    }
+
+    // 797. 所有可能的路径
+    public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
+        List<List<Integer>> a = new ArrayList<>();
+        LinkedList<Integer> z = new LinkedList<>();
+        allPathsSourceTargetDFS(graph, a, 0, z);
+        return a;
+    }
+
+    private void allPathsSourceTargetDFS(int[][] graph, List<List<Integer>> a, int p, LinkedList<Integer> z) {
+        z.addLast(p);
+        for (int i : graph[p])
+            allPathsSourceTargetDFS(graph, a, i, z);
+        if (p == graph.length - 1) a.add(new ArrayList<>(z));
+        z.removeLast();
+    }
+
+    // 748. 最短补全词
+    public String shortestCompletingWord(String licensePlate, String[] words) {
+        Map<Character, Integer> map = shortestCompletingWord(licensePlate);
+        String str = null;
+        for (String s : words)
+            if (shortestCompletingWord(map, s))
+                str = str == null ? s : s.length() < str.length() ? s : str;
+        return str;
+    }
+
+    private Map<Character, Integer> shortestCompletingWord(String licensePlate) {
+        Map<Character, Integer> map = new HashMap<>();
+        for (char c : licensePlate.toCharArray()) {
+            if (c >= 'A' && c <= 'Z') c += 32;
+            if (c >= 'a' && c <= 'z')
+                map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+        return map;
+    }
+
+    private boolean shortestCompletingWord(Map<Character, Integer> map, String word) {
+        Map<Character, Integer> m = new HashMap<>();
+        for (char c : word.toCharArray()) {
+            if (c >= 'A' && c <= 'Z') c += 32;
+            m.put(c, m.getOrDefault(c, 0) + 1);
+        }
+        for (Map.Entry<Character, Integer> entry : map.entrySet())
+            if (m.getOrDefault(entry.getKey(), 0) < entry.getValue()) return false;
+        return true;
+    }
+
+    // 746. 使用最小花费爬楼梯
+    public int minCostClimbingStairs(int[] cost) {
+        int p1 = 0, p2 = 0, g;
+        for (int i = 2; i <= cost.length; i++) {
+            g = Math.min(p1 + cost[i - 2], p2 + cost[i - 1]);
+            p1 = p2;
+            p2 = g;
+        }
+        return p2;
+    }
+
+    // 739. 每日温度
+    public int[] dailyTemperatures(int[] temperatures) {
+        int[] ns = new int[temperatures.length];
+        CN:
+        for (int i = 0; i < ns.length; i++) {
+            for (int j = i + 1; j < ns.length; j++) {
+                if (temperatures[j] > temperatures[i]) {
+                    ns[i] = j - i;
+                    continue CN;
+                }
+                ns[i] = 0;
+            }
+        }
+        return ns;
+    }
+
+    // 733. 图像渲染
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        floodFillDFS(image, sr, sc, image[sr][sc], newColor);
+        return image;
+    }
+
+    private void floodFillDFS(int[][] image, int p1, int p2, int t, int n) {
+        if (p1 < 0 || p2 < 0 || p1 > image.length - 1 || p2 > image[0].length - 1 || image[p1][p2] != t || image[p1][p2] == n)
+            return;
+        image[p1][p2] = n;
+        floodFillDFS(image, p1 - 1, p2, t, n);
+        floodFillDFS(image, p1, p2 - 1, t, n);
+        floodFillDFS(image, p1 + 1, p2, t, n);
+        floodFillDFS(image, p1, p2 + 1, t, n);
+    }
+
+    // 709. 转换成小写字母
+    public String toLowerCase(String s) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            sb.append(c >= 'A' && c <= 'Z' ? (char) (c + 32) : c);
+        }
+        return sb.toString();
+    }
+
+    // 704. 二分查找
+    public int search(int[] nums, int target) {
+        int l = 0, m, r = nums.length - 1;
+        while (l <= r) {
+            m = l + r >> 1;
+            if (nums[m] == target) return m;
+            else if (nums[m] > target) r = m - 1;
+            else l = m + 1;
+        }
+        return -1;
+    }
+
+    // 695. 岛屿的最大面积
+    public int maxAreaOfIsland(int[][] grid) {
+        int size = 0;
+        for (int i = 0; i < grid.length; i++)
+            for (int j = 0; j < grid[i].length; j++)
+                if (grid[i][j] == 1) size = Math.max(size, findGrid(grid, i, j));
+        return size;
+    }
+
+    private int findGrid(int[][] grid, int p1, int p2) {
+        if (p1 < 0 || p1 > grid.length - 1 || p2 < 0 || p2 > grid[0].length - 1) return 0;
+        if (grid[p1][p2]-- == 1)
+            return 1 + findGrid(grid, p1 - 1, p2) +
+                    findGrid(grid, p1, p2 - 1) +
+                    findGrid(grid, p1 + 1, p2) +
+                    findGrid(grid, p1, p2 + 1);
+        return 0;
+    }
+
+    // 566. 重塑矩阵
+    public int[][] matrixReshape(int[][] mat, int r, int c) {
+        if (mat.length * mat[0].length != r * c) return mat;
+        int[][] nums = new int[r][c];
+        int p1 = 0, p2 = 0;
+        for (int[] is : mat) {
+            for (int i : is) {
+                if (p2 == c) {
+                    p1++;
+                    p2 = 0;
+                }
+                nums[p1][p2] = i;
+                p2++;
+            }
+        }
+        return nums;
     }
 
     // 557. 反转字符串中的单词 III
@@ -123,7 +352,9 @@ public class Solution {
                 p2--;
             }
         }
-        return String.valueOf(chars);
+        StringBuilder sb = new StringBuilder();
+        sb.append(chars);
+        return sb.toString();
     }
 
     // 509. 斐波那契数
@@ -528,7 +759,7 @@ public class Solution {
     }
 
     // 33. 搜索旋转排序数组
-    public int search(int[] nums, int target) {
+    public int searchRotate(int[] nums, int target) {
         int l = 0, m, r = nums.length - 1;
         while (l <= r) {
             m = l + r >> 1;
@@ -807,3 +1038,43 @@ public class Solution {
 
     // endregion
 }
+
+// region 数据结构设计题
+
+// 剑指 Offer 09. 用两个栈实现队列
+class CQueue {
+    private MyQueue head;
+    private MyQueue boot;
+
+    public CQueue() {
+    }
+
+    public void appendTail(int value) {
+        if (head == null) {
+            head = new MyQueue(value, null);
+            boot = head;
+            return;
+        }
+        boot.next = new MyQueue(value, null);
+        boot = boot.next;
+    }
+
+    public int deleteHead() {
+        if (head == null) return -1;
+        int i = head.val;
+        head = head.next;
+        return i;
+    }
+
+    class MyQueue {
+        int val;
+        MyQueue next;
+
+        public MyQueue(int val, MyQueue next) {
+            this.val = val;
+            this.next = next;
+        }
+    }
+}
+
+// endregion
