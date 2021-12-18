@@ -58,6 +58,20 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 49. 字母异位词分组
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String, List<String>> map = new HashMap<>();
+        for (String s : strs) {
+            final char[] cs = s.toCharArray();
+            Arrays.sort(cs);
+            String p = new String(cs);
+            if (!map.containsKey(p))
+                map.put(p, new LinkedList<>());
+            map.get(p).add(s);
+        }
+        return new LinkedList<>(map.values());
+    }
+
     // 2. 两数相加
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode listNode = new ListNode(0);
