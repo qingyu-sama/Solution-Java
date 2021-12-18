@@ -58,6 +58,30 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 419. 甲板上的战舰
+    public int countBattleships(char[][] board) {
+        /*DFS解法代码
+        int c = 0;
+        for (int i = 0; i < board.length; i++)
+            for (int j = 0; j < board[0].length; j++)
+                if (board[i][j] == 'X' && c++ >= 0) countBattleshipsDFS(board, i, j);
+        return c;
+         */
+        int c = 0;
+        for (int i = 0; i < board.length; i++)
+            for (int j = 0; j < board[0].length; j++)
+                if (!(i > 0 && board[i - 1][j] == 'X' || j > 0 && board[i][j - 1] == 'X') && board[i][j] == 'X') c++;
+        return c;
+    }
+
+    private void countBattleshipsDFS(char[][] board, int p1, int p2) {
+        board[p1][p2] = '.';
+        if (p1 > 0 && board[p1 - 1][p2] == 'X') countBattleshipsDFS(board, p1 - 1, p2);
+        if (p2 > 0 && board[p1][p2 - 1] == 'X') countBattleshipsDFS(board, p1, p2 - 1);
+        if (p1 < board.length - 1 && board[p1 + 1][p2] == 'X') countBattleshipsDFS(board, p1 + 1, p2);
+        if (p2 < board[0].length - 1 && board[p1][p2 + 1] == 'X') countBattleshipsDFS(board, p1, p2 + 1);
+    }
+
     // 557. 反转字符串中的单词 III
     public String reverseWords(String s) {
         int p1, p2, p = 0;
