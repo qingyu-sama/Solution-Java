@@ -58,6 +58,17 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 56. 合并区间
+    public int[][] merge(int[][] intervals) {
+        Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
+        LinkedList<int[]> ls = new LinkedList<>();
+        ls.addLast(intervals[0]);
+        for (int[] is : intervals)
+            if (is[0] <= ls.getLast()[1]) ls.getLast()[1] = Math.max(ls.getLast()[1], is[1]);
+            else ls.addLast(is);
+        return ls.toArray(new int[ls.size()][]);
+    }
+
     // 49. 字母异位词分组
     public List<List<String>> groupAnagrams(String[] strs) {
         Map<String, List<String>> map = new HashMap<>();
