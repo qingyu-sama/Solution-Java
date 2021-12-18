@@ -58,6 +58,23 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 506. 相对名次
+    public String[] findRelativeRanks(int[] score) {
+        int[] val = Arrays.copyOf(score, score.length);
+        Arrays.sort(val);
+        Map<Integer, String> map = new HashMap<>();
+        if (val.length > 0) map.put(val[val.length - 1], "Gold Medal");
+        if (val.length > 1) map.put(val[val.length - 2], "Silver Medal");
+        if (val.length > 2) map.put(val[val.length - 3], "Bronze Medal");
+        for (int i = val.length - 4; i >= 0; i--)
+            map.put(val[i], String.valueOf(val.length - i));
+        int p = 0;
+        String[] strings = new String[score.length];
+        for (int i : score)
+            strings[p++] = map.get(i);
+        return strings;
+    }
+
     // 1446. 连续字符
     public int maxPower(String s) {
         char c = s.charAt(0);
