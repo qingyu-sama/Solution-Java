@@ -64,6 +64,26 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 1034. 边界着色
+    public int[][] colorBorder(int[][] grid, int row, int col, int color) {
+        boolean[][] zt = new boolean[grid.length][grid[0].length];
+        colorBorderDFS(grid, zt, row, col, grid[row][col], color);
+        return grid;
+    }
+
+    private void colorBorderDFS(int[][] grid, boolean[][] zt, int p1, int p2, int t, int n) {
+        if (zt[p1][p2]) return;
+        zt[p1][p2] = true;
+        if (!(p1 > 0) || !(p2 > 0) || !(p1 < grid.length - 1) || !(p2 < grid[0].length - 1) ||
+                !(grid[p1 - 1][p2] == t || zt[p1 - 1][p2]) || !(grid[p1][p2 - 1] == t || zt[p1][p2 - 1]) ||
+                !(grid[p1 + 1][p2] == t || zt[p1 + 1][p2]) || !(grid[p1][p2 + 1] == t || zt[p1][p2 + 1]))
+            grid[p1][p2] = n;
+        if (p1 > 0 && grid[p1 - 1][p2] == t) colorBorderDFS(grid, zt, p1 - 1, p2, t, n);
+        if (p2 > 0 && grid[p1][p2 - 1] == t) colorBorderDFS(grid, zt, p1, p2 - 1, t, n);
+        if (p1 < grid.length - 1 && grid[p1 + 1][p2] == t) colorBorderDFS(grid, zt, p1 + 1, p2, t, n);
+        if (p2 < grid[0].length - 1 && grid[p1][p2 + 1] == t) colorBorderDFS(grid, zt, p1, p2 + 1, t, n);
+    }
+
     // 383. 赎金信
     public boolean canConstruct(String ransomNote, String magazine) {
         if (magazine.length() < ransomNote.length()) return false;
