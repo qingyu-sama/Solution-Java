@@ -64,6 +64,15 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 58. 最后一个单词的长度
+    public int lengthOfLastWord(String s) {
+        int l = 0;
+        for (int i = s.length() - 1; i >= 0; i--)
+            if (s.charAt(i) != ' ') l++;
+            else if (l > 0) break;
+        return l;
+    }
+
     // 1034. 边界着色
     public int[][] colorBorder(int[][] grid, int row, int col, int color) {
         boolean[][] zt = new boolean[grid.length][grid[0].length];
