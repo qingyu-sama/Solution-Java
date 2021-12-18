@@ -58,6 +58,18 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 1446. 连续字符
+    public int maxPower(String s) {
+        char c = s.charAt(0);
+        int v = 0, z = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (c == s.charAt(i)) v++;
+            else if ((v = 1) == 1) c = s.charAt(i);
+            z = Math.max(z, v);
+        }
+        return z;
+    }
+
     // 56. 合并区间
     public int[][] merge(int[][] intervals) {
         Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
