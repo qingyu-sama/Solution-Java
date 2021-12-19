@@ -64,6 +64,21 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 187. 重复的DNA序列
+    public List<String> findRepeatedDnaSequences(String s) {
+        if (s.length() < 11) return new ArrayList<>();
+        Map<String, Boolean> map = new HashMap<>();
+        List<String> list = new LinkedList<>();
+        for (int i = 0; i <= s.length() - 10; i++) {
+            String str = s.substring(i, i + 10);
+            if (map.containsKey(str)) {
+                if (map.get(str) && map.put(str, false))
+                    list.add(str);
+            } else map.put(str, true);
+        }
+        return list;
+    }
+
     // 997. 找到小镇的法官
     public int findJudge(int n, int[][] trust) {
         int[] inp = new int[n + 1], oup = new int[n + 1];
