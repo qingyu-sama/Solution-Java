@@ -64,6 +64,18 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 997. 找到小镇的法官
+    public int findJudge(int n, int[][] trust) {
+        int[] inp = new int[n + 1], oup = new int[n + 1];
+        for (int[] is : trust) {
+            inp[is[1]]++;
+            oup[is[0]]++;
+        }
+        for (int i = 1; i <= n; i++)
+            if (inp[i] == n - 1 && oup[i] == 0) return i;
+        return -1;
+    }
+
     // 58. 最后一个单词的长度
     public int lengthOfLastWord(String s) {
         int l = 0;
