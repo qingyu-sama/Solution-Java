@@ -4,7 +4,7 @@ import java.util.*;
 
 class test {
     public static void main(String[] args) {
-
+        System.out.println(new Solution().rangeBitwiseAnd(2147483646, 2147483647));
     }
 }
 
@@ -63,6 +63,14 @@ class Node {
 
 public class Solution {
     // region 一般题
+
+    // 201. 数字范围按位与
+    public int rangeBitwiseAnd(int left, int right) {
+        int s = left;
+        for (int i = left; i <= right; i++)
+            if ((s &= i) == 0 || i == right) break;
+        return s;
+    }
 
     // 187. 重复的DNA序列
     public List<String> findRepeatedDnaSequences(String s) {
