@@ -1232,6 +1232,27 @@ public class Solution {
 
     // region 链表题
 
+    private int getListNodeLength(ListNode head) {
+        int i = 0;
+        while (head != null && i++ >= 0) head = head.next;
+        return i;
+    }
+
+    // 61. 旋转链表
+    public ListNode rotateRight(ListNode head, int k) {
+        if (head == null) return head;
+        k %= getListNodeLength(head);
+        ListNode l1 = head, l2 = l1;
+        while (l2.next != null) {
+            l2 = l2.next;
+            if (k-- <= 0) l1 = l1.next;
+        }
+        l2.next = head;
+        head = l1.next;
+        l1.next = null;
+        return head;
+    }
+
     // 160. 相交链表
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         if (headA == null || headB == null) return null;
