@@ -4,7 +4,7 @@ import java.util.*;
 
 class test {
     public static void main(String[] args) {
-        System.out.println(new Solution().rangeBitwiseAnd(2147483646, 2147483647));
+
     }
 }
 
@@ -1247,6 +1247,86 @@ public class Solution {
 }
 
 // region 数据结构设计题
+
+// 707. 设计链表
+class MyLinkedList {
+    private Node head;
+    private Node tail;
+    private int size;
+
+    public MyLinkedList() {
+        this.head = null;
+        this.tail = null;
+        this.size = 0;
+    }
+
+    public int get(int index) {
+        if (index < 0 || index > size - 1) return -1;
+        Node n = head;
+        while (index-- > 0)
+            n = n.next;
+        return n.val;
+    }
+
+    public void addAtHead(int val) {
+        head = new Node(val, head);
+        if (tail == null) tail = head;
+        size++;
+    }
+
+    public void addAtTail(int val) {
+        Node n = new Node(val);
+        if (tail == null) {
+            tail = n;
+            head = n;
+        } else {
+            tail.next = n;
+            tail = tail.next;
+        }
+        size++;
+    }
+
+    public void addAtIndex(int index, int val) {
+        if (index <= 0) addAtHead(val);
+        else if (index == size) addAtTail(val);
+        else if (index < size) {
+            Node n = head;
+            while (--index > 0)
+                n = n.next;
+            n.next = new Node(val, n.next);
+            size++;
+        }
+    }
+
+    public void deleteAtIndex(int index) {
+        if (index < 0 || index >= size) return;
+        if (index == 0) {
+            head = head.next;
+            if (head == null) tail = null;
+        } else {
+            Node n = head;
+            while (--index > 0) n = n.next;
+            n.next = n.next.next;
+            if (n.next == null) tail = n;
+        }
+        size--;
+    }
+
+    private class Node {
+        int val;
+        Node next;
+
+        Node(int val) {
+            this.val = val;
+            next = null;
+        }
+
+        Node(int val, Node next) {
+            this.val = val;
+            this.next = next;
+        }
+    }
+}
 
 // 剑指 Offer 09. 用两个栈实现队列
 class CQueue {
