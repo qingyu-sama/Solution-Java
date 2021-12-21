@@ -1,5 +1,7 @@
 package top.mictech;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 class test {
@@ -63,6 +65,11 @@ class Node {
 
 public class Solution {
     // region 一般题
+
+    // 1154. 一年中的第几天
+    public int dayOfYear(String date) {
+        return LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd")).getDayOfYear();
+    }
 
     // 201. 数字范围按位与
     public int rangeBitwiseAnd(int left, int right) {
