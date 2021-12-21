@@ -66,6 +66,23 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 202. 快乐数
+    public boolean isHappy(int n) {
+        Set<Integer> set = new HashSet<>();
+        int c = n, s;
+        while (c != 1) {
+            if (!set.add(c)) return false;
+            n = 0;
+            while (c != 0) {
+                s = c % 10;
+                c /= 10;
+                n += s * s;
+            }
+            c = n;
+        }
+        return true;
+    }
+
     // 1154. 一年中的第几天
     public int dayOfYear(String date) {
         return LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd")).getDayOfYear();
