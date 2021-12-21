@@ -66,6 +66,21 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 278. 第一个错误的版本
+    public int firstBadVersion(int n) {
+        int l = 1, r = n, m;
+        while (l < r) {
+            m = l + ((r - l) >> 1);
+            if (isBadVersion(m)) r = m;
+            else l = m + 1;
+        }
+        return l;
+    }
+
+    private boolean isBadVersion(int m) {
+        return true;
+    }
+
     // 202. 快乐数
     public boolean isHappy(int n) {
         Set<Integer> set = new HashSet<>();
