@@ -66,6 +66,41 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 1249. 移除无效的括号
+    public String minRemoveToMakeValid(String s) {
+        Stack<Character> stack = new Stack<>();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == '(') {
+                stack.push(c);
+                sb.append(c);
+            } else if (c == ')') {
+                if (!stack.empty()) {
+                    sb.append(c);
+                    stack.pop();
+                }
+            } else sb.append(c);
+        }
+        s = sb.toString();
+        stack.clear();
+        sb.setLength(0);
+        for (int i = s.length() - 1; i >= 0; i--) {
+            char c = s.charAt(i);
+            if (c == ')') {
+                sb.append(c);
+                stack.push(c);
+            } else if (c == '(') {
+                if (!stack.empty()) {
+                    sb.append(c);
+                    stack.pop();
+                }
+            } else sb.append(c);
+        }
+        sb.reverse();
+        return sb.toString();
+    }
+
     // 686. 重复叠加字符串匹配
     public int repeatedStringMatch(String a, String b) {
         if (true) {
