@@ -1327,6 +1327,42 @@ public class Solution {
 
 // region 数据结构设计题
 
+// 155. 最小栈
+class MinStack {
+    private Node head;
+
+    public MinStack() {
+    }
+
+    public void push(int val) {
+        head = new Node(val, head == null ? val : Math.min(head.min, val), head);
+    }
+
+    public void pop() {
+        head = head.next;
+    }
+
+    public int top() {
+        return head.val;
+    }
+
+    public int getMin() {
+        return head.min;
+    }
+
+    class Node {
+        int val;
+        int min;
+        Node next;
+
+        Node(int val, int min, Node next) {
+            this.val = val;
+            this.min = min;
+            this.next = next;
+        }
+    }
+}
+
 // 707. 设计链表
 class MyLinkedList {
     private Node head;
