@@ -66,6 +66,25 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 686. 重复叠加字符串匹配
+    public int repeatedStringMatch(String a, String b) {
+        if (true) {
+            Set<Character> set = new HashSet<>();
+            for (int i = 0; i < a.length(); i++)
+                set.add(a.charAt(i));
+            for (int i = 0; i < b.length(); i++)
+                if (!set.contains(b.charAt(i))) return -1;
+            set.clear();
+        }
+        int c = 0;
+        StringBuilder sb = new StringBuilder();
+        for (; sb.length() < b.length(); c++) sb.append(a);
+        if (sb.toString().contains(b)) return c;
+        sb.append(a);
+        if (sb.toString().contains(b)) return c + 1;
+        return -1;
+    }
+
     // 278. 第一个错误的版本
     public int firstBadVersion(int n) {
         int l = 1, r = n, m;
