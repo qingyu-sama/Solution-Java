@@ -1236,6 +1236,23 @@ public class Solution {
         return new int[]{map.get(target - nums[i]), i};
     }
 
+    // 167. 两数之和 II - 输入有序数组
+    public int[] twoSum2(int[] numbers, int target) {
+        int t, l, m, r;
+        for (int i = 0; i < numbers.length - 1; i++) {
+            t = target - numbers[i];
+            l = i + 1;
+            r = numbers.length - 1;
+            while (l <= r) {
+                m = l + r >> 1;
+                if (numbers[m] == t) return new int[]{i + 1, m + 1};
+                if (numbers[m] > t) r = m - 1;
+                else l = m + 1;
+            }
+        }
+        return new int[]{-1, -1};
+    }
+
     // 79. 单词搜索
     public boolean exist(char[][] board, String word) {
         boolean[][] zt = new boolean[board.length][board[0].length];
