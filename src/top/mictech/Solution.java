@@ -66,20 +66,6 @@ class Node {
 public class Solution {
     // region 一般题
 
-    // 108. 将有序数组转换为二叉搜索树
-    public TreeNode sortedArrayToBST(int[] nums) {
-        return sortedArrayToBST(nums, 0, nums.length - 1);
-    }
-
-    private TreeNode sortedArrayToBST(int[] nums, int l, int r) {
-        if (l > r) return null;
-        int m = l + r >> 1;
-        TreeNode root = new TreeNode(nums[m]);
-        root.left = sortedArrayToBST(nums, l, m - 1);
-        root.right = sortedArrayToBST(nums, m + 1, r);
-        return root;
-    }
-
     // 1823. 找出游戏的获胜者
     public int findTheWinner(int n, int k) {
         class Node {
@@ -333,28 +319,6 @@ public class Solution {
             map.get(p).add(s);
         }
         return new LinkedList<>(map.values());
-    }
-
-    // 2. 两数相加
-    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode listNode = new ListNode(0);
-        ListNode l = listNode;
-        int c = 0;
-        c += l1.val + l2.val;
-        l.val = c % 10;
-        c /= 10;
-        l1 = l1.next;
-        l2 = l2.next;
-        while (l1 != null || l2 != null || c != 0) {
-            c += l1 == null ? 0 : l1.val;
-            c += l2 == null ? 0 : l2.val;
-            l.next = new ListNode(c % 10);
-            l = l.next;
-            c /= 10;
-            if (l1 != null) l1 = l1.next;
-            if (l2 != null) l2 = l2.next;
-        }
-        return listNode;
     }
 
     // 419. 甲板上的战舰
@@ -1362,6 +1326,28 @@ public class Solution {
 
     // region 链表题
 
+    // 2. 两数相加
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode listNode = new ListNode(0);
+        ListNode l = listNode;
+        int c = 0;
+        c += l1.val + l2.val;
+        l.val = c % 10;
+        c /= 10;
+        l1 = l1.next;
+        l2 = l2.next;
+        while (l1 != null || l2 != null || c != 0) {
+            c += l1 == null ? 0 : l1.val;
+            c += l2 == null ? 0 : l2.val;
+            l.next = new ListNode(c % 10);
+            l = l.next;
+            c /= 10;
+            if (l1 != null) l1 = l1.next;
+            if (l2 != null) l2 = l2.next;
+        }
+        return listNode;
+    }
+
     private int getListNodeLength(ListNode head) {
         int i = 0;
         while (head != null && i++ >= 0) head = head.next;
@@ -1392,6 +1378,24 @@ public class Solution {
             l2 = l2 == null ? headA : l2.next;
         }
         return l1;
+    }
+
+    // endregion
+
+    // region 二叉树题
+
+    // 108. 将有序数组转换为二叉搜索树
+    public TreeNode sortedArrayToBST(int[] nums) {
+        return sortedArrayToBST(nums, 0, nums.length - 1);
+    }
+
+    private TreeNode sortedArrayToBST(int[] nums, int l, int r) {
+        if (l > r) return null;
+        int m = l + r >> 1;
+        TreeNode root = new TreeNode(nums[m]);
+        root.left = sortedArrayToBST(nums, l, m - 1);
+        root.right = sortedArrayToBST(nums, m + 1, r);
+        return root;
     }
 
     // endregion
