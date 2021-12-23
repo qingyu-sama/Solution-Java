@@ -66,6 +66,30 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 1823. 找出游戏的获胜者
+    public int findTheWinner(int n, int k) {
+        class Node {
+            private int val;
+            private Node next;
+
+            private Node(int val, Node next) {
+                this.val = val;
+                this.next = next;
+            }
+        }
+        Node head = new Node(1, null);
+        head.next = head;
+        for (int i = n; i > 1; i--)
+            head.next = new Node(i, head.next);
+        while (head.val != head.next.val) {
+            for (int i = 1; i < k; i++)
+                head = head.next;
+            head.val = head.next.val;
+            head.next = head.next.next;
+        }
+        return head.val;
+    }
+
     // 1249. 移除无效的括号
     public String minRemoveToMakeValid(String s) {
         Stack<Character> stack = new Stack<>();
