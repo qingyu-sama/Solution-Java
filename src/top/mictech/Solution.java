@@ -1238,17 +1238,12 @@ public class Solution {
 
     // 167. 两数之和 II - 输入有序数组
     public int[] twoSum2(int[] numbers, int target) {
-        int t, l, m, r;
-        for (int i = 0; i < numbers.length - 1; i++) {
-            t = target - numbers[i];
-            l = i + 1;
-            r = numbers.length - 1;
-            while (l <= r) {
-                m = l + r >> 1;
-                if (numbers[m] == t) return new int[]{i + 1, m + 1};
-                if (numbers[m] > t) r = m - 1;
-                else l = m + 1;
-            }
+        int l = 0, r = numbers.length - 1, t;
+        while (l < r) {
+            t = numbers[l] + numbers[r];
+            if (t == target) return new int[]{l + 1, r + 1};
+            if (t > target) r--;
+            else l++;
         }
         return new int[]{-1, -1};
     }
