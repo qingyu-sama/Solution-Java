@@ -1391,6 +1391,27 @@ public class Solution {
 
     // region 二叉树题
 
+    // 113. 路径总和 II
+    public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+        List<List<Integer>> lists = new LinkedList<>();
+        LinkedList<Integer> list = new LinkedList<>();
+        pathSum(root, list, lists, targetSum);
+        return lists;
+    }
+
+    private void pathSum(TreeNode root, LinkedList<Integer> list, List<List<Integer>> lists, int t) {
+        if (root == null) return;
+        list.addLast(root.val);
+        if ((t -= root.val) == 0 && root.left == null && root.right == null) {
+            lists.add(new LinkedList<>(list));
+            list.removeLast();
+            return;
+        }
+        pathSum(root.left, list, lists, t);
+        pathSum(root.right, list, lists, t);
+        list.removeLast();
+    }
+
     // 199. 二叉树的右视图
     public List<Integer> rightSideView(TreeNode root) {
         List<Integer> list = new LinkedList<>();
