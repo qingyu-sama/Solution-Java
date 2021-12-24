@@ -73,6 +73,23 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 1705. 吃苹果的最大数目
+    public int eatenApples(int[] apples, int[] days) {
+        PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[0]));
+        int t = 0, count = 0, len = apples.length;
+        while (t < len || !pq.isEmpty()) {
+            if (t < len && apples[t] != 0) pq.add(new int[]{t + days[t], apples[t]});
+            while (!pq.isEmpty() && pq.peek()[0] == t) pq.poll();
+            if (!pq.isEmpty()) {
+                int[] temp = pq.poll();
+                if (--temp[1] > 0 && temp[0] > t) pq.add(temp);
+                count++;
+            }
+            t++;
+        }
+        return count;
+    }
+
     // 1823. 找出游戏的获胜者
     public int findTheWinner(int n, int k) {
         class Node {
@@ -1392,14 +1409,14 @@ public class Solution {
     // region 二叉树题
 
     // 113. 路径总和 II
-    public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+    public List<List<Integer>> pathSumDFS(TreeNode root, int targetSum) {
         List<List<Integer>> lists = new LinkedList<>();
         LinkedList<Integer> list = new LinkedList<>();
-        pathSum(root, list, lists, targetSum);
+        pathSumDFS(root, list, lists, targetSum);
         return lists;
     }
 
-    private void pathSum(TreeNode root, LinkedList<Integer> list, List<List<Integer>> lists, int t) {
+    private void pathSumDFS(TreeNode root, LinkedList<Integer> list, List<List<Integer>> lists, int t) {
         if (root == null) return;
         list.addLast(root.val);
         if ((t -= root.val) == 0 && root.left == null && root.right == null) {
@@ -1407,8 +1424,8 @@ public class Solution {
             list.removeLast();
             return;
         }
-        pathSum(root.left, list, lists, t);
-        pathSum(root.right, list, lists, t);
+        pathSumDFS(root.left, list, lists, t);
+        pathSumDFS(root.right, list, lists, t);
         list.removeLast();
     }
 
