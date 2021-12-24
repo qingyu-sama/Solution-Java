@@ -6,7 +6,14 @@ import java.util.*;
 
 class test {
     public static void main(String[] args) {
-
+        Solution solution = new Solution();
+        long ns = System.nanoTime(), ms = System.currentTimeMillis();
+        int i = solution.findTheWinner(100, 5);
+        ns = System.nanoTime() - ns;
+        ms = System.currentTimeMillis() - ms;
+        System.out.println(i);
+        System.out.println(ms);
+        System.out.println(ns);
     }
 }
 
@@ -41,10 +48,10 @@ class TreeNode {
 }
 
 class Node {
-    public int val;
-    public Node left;
-    public Node right;
-    public Node next;
+    int val;
+    Node left;
+    Node right;
+    Node next;
 
     public Node() {
     }
@@ -1383,6 +1390,20 @@ public class Solution {
     // endregion
 
     // region 二叉树题
+
+    // 199. 二叉树的右视图
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> list = new LinkedList<>();
+        rightSideView(root, list, 0);
+        return list;
+    }
+
+    private void rightSideView(TreeNode root, List<Integer> list, int d) {
+        if (root == null) return;
+        if (d++ == list.size()) list.add(root.val);
+        rightSideView(root.right, list, d);
+        rightSideView(root.left, list, d);
+    }
 
     // 108. 将有序数组转换为二叉搜索树
     public TreeNode sortedArrayToBST(int[] nums) {
