@@ -72,39 +72,6 @@ class Node {
 public class Solution {
     // region 一般题
 
-    // 230. 二叉搜索树中第K小的元素
-    private int kthSmallest, kthSmallestAns;
-
-    public int kthSmallest(TreeNode root, int k) {
-        kthSmallest = k;
-        kthSmallestDFS(root);
-        return kthSmallestAns;
-    }
-
-    private void kthSmallestDFS(TreeNode root) {
-        if (root == null || kthSmallest <= 0) return;
-        kthSmallestDFS(root.left);
-        if (--kthSmallest == 0) kthSmallestAns = root.val;
-        kthSmallestDFS(root.right);
-    }
-
-    // 1609. 奇偶树
-    public boolean isEvenOddTree(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
-        return isEvenOddTreeDFS(root, list, 0);
-    }
-
-    private boolean isEvenOddTreeDFS(TreeNode root, List<Integer> list, int deep) {
-        if (root == null) return true;
-        if (deep % 2 == root.val % 2) return false;
-        if (list.size() > deep)
-            if (deep % 2 == 0 && list.get(deep) >= root.val) return false;
-            else if (deep % 2 == 1 && list.get(deep) <= root.val) return false;
-            else list.set(deep, root.val);
-        else list.add(root.val);
-        return isEvenOddTreeDFS(root.left, list, deep + 1) && isEvenOddTreeDFS(root.right, list, deep + 1);
-    }
-
     // 1705. 吃苹果的最大数目
     public int eatenApples(int[] apples, int[] days) {
         PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[0]));
@@ -1439,6 +1406,56 @@ public class Solution {
     // endregion
 
     // region 二叉树题
+
+    // 783. 二叉搜索树节点最小距离
+    private TreeNode minDiffInBSTRoot = null;
+    private int minDiffInBSTAns = Integer.MAX_VALUE;
+    // 230. 二叉搜索树中第K小的元素
+    private int kthSmallest, kthSmallestAns;
+
+    public int minDiffInBST(TreeNode root) {
+        minDiffInDFS(root);
+        return minDiffInBSTAns;
+    }
+
+    private void minDiffInDFS(TreeNode root) {
+        if (root == null || minDiffInBSTAns == 1) return;
+        minDiffInDFS(root.left);
+        if (minDiffInBSTRoot != null)
+            minDiffInBSTAns = Math.min(minDiffInBSTAns, Math.abs(minDiffInBSTRoot.val - root.val));
+        minDiffInBSTRoot = root;
+        minDiffInDFS(root.right);
+    }
+
+    public int kthSmallest(TreeNode root, int k) {
+        kthSmallest = k;
+        kthSmallestDFS(root);
+        return kthSmallestAns;
+    }
+
+    private void kthSmallestDFS(TreeNode root) {
+        if (root == null || kthSmallest <= 0) return;
+        kthSmallestDFS(root.left);
+        if (--kthSmallest == 0) kthSmallestAns = root.val;
+        kthSmallestDFS(root.right);
+    }
+
+    // 1609. 奇偶树
+    public boolean isEvenOddTree(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        return isEvenOddTreeDFS(root, list, 0);
+    }
+
+    private boolean isEvenOddTreeDFS(TreeNode root, List<Integer> list, int deep) {
+        if (root == null) return true;
+        if (deep % 2 == root.val % 2) return false;
+        if (list.size() > deep)
+            if (deep % 2 == 0 && list.get(deep) >= root.val) return false;
+            else if (deep % 2 == 1 && list.get(deep) <= root.val) return false;
+            else list.set(deep, root.val);
+        else list.add(root.val);
+        return isEvenOddTreeDFS(root.left, list, deep + 1) && isEvenOddTreeDFS(root.right, list, deep + 1);
+    }
 
     // 113. 路径总和 II
     public List<List<Integer>> pathSumDFS(TreeNode root, int targetSum) {
