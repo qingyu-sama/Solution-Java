@@ -72,6 +72,22 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 230. 二叉搜索树中第K小的元素
+    private int kthSmallest, kthSmallestAns;
+
+    public int kthSmallest(TreeNode root, int k) {
+        kthSmallest = k;
+        kthSmallestDFS(root);
+        return kthSmallestAns;
+    }
+
+    private void kthSmallestDFS(TreeNode root) {
+        if (root == null || kthSmallest <= 0) return;
+        kthSmallestDFS(root.left);
+        if (--kthSmallest == 0) kthSmallestAns = root.val;
+        kthSmallestDFS(root.right);
+    }
+
     // 1609. 奇偶树
     public boolean isEvenOddTree(TreeNode root) {
         List<Integer> list = new ArrayList<>();
