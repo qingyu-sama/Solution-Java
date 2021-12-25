@@ -1413,6 +1413,7 @@ public class Solution {
     // 230. 二叉搜索树中第K小的元素
     private int kthSmallest, kthSmallestAns;
 
+    // 783. 二叉搜索树节点最小距离
     public int minDiffInBST(TreeNode root) {
         minDiffInDFS(root);
         return minDiffInBSTAns;
@@ -1427,6 +1428,7 @@ public class Solution {
         minDiffInDFS(root.right);
     }
 
+    // 230. 二叉搜索树中第K小的元素
     public int kthSmallest(TreeNode root, int k) {
         kthSmallest = k;
         kthSmallestDFS(root);
