@@ -8,10 +8,9 @@ class test {
     public static void main(String[] args) {
         Solution solution = new Solution();
         long ns = System.nanoTime(), ms = System.currentTimeMillis();
-        int i = solution.findTheWinner(100, 5);
+
         ns = System.nanoTime() - ns;
         ms = System.currentTimeMillis() - ms;
-        System.out.println(i);
         System.out.println(ms);
         System.out.println(ns);
     }
@@ -72,6 +71,23 @@ class Node {
 
 public class Solution {
     // region 一般题
+
+    // 1609. 奇偶树
+    public boolean isEvenOddTree(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        return isEvenOddTreeDFS(root, list, 0);
+    }
+
+    private boolean isEvenOddTreeDFS(TreeNode root, List<Integer> list, int deep) {
+        if (root == null) return true;
+        if (deep % 2 == root.val % 2) return false;
+        if (list.size() > deep)
+            if (deep % 2 == 0 && list.get(deep) >= root.val) return false;
+            else if (deep % 2 == 1 && list.get(deep) <= root.val) return false;
+            else list.set(deep, root.val);
+        else list.add(root.val);
+        return isEvenOddTreeDFS(root.left, list, deep + 1) && isEvenOddTreeDFS(root.right, list, deep + 1);
+    }
 
     // 1705. 吃苹果的最大数目
     public int eatenApples(int[] apples, int[] days) {
