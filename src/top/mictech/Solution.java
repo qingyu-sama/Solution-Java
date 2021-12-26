@@ -8,7 +8,7 @@ class test {
     public static void main(String[] args) {
         Solution solution = new Solution();
         long ns = System.nanoTime(), ms = System.currentTimeMillis();
-
+        System.out.println(new Solution().checkInclusion("az", "abcza"));
         ns = System.nanoTime() - ns;
         ms = System.currentTimeMillis() - ms;
         System.out.println(ms);
@@ -71,6 +71,29 @@ class Node {
 
 public class Solution {
     // region 一般题
+
+    // 567. 字符串的排列
+    public boolean checkInclusion(String s1, String s2) {
+        if (s1.length() > s2.length()) return false;
+        int[] ints1 = new int[26];
+        for (int i = 0; i < s1.length(); i++)
+            ints1[s1.charAt(i) - 97]++;
+        int p1 = 0, p2 = s1.length();
+        int[] ints2 = new int[26];
+        for (int i = 0; i < p2; i++)
+            ints2[s2.charAt(i) - 97]++;
+        for (int i = 0; i < 26; i++)
+            if (ints1[i] != ints2[i]) break;
+            else if (i == 25) return true;
+        while (p2 < s2.length()) {
+            ints2[s2.charAt(p1++) - 97]--;
+            ints2[s2.charAt(p2++) - 97]++;
+            for (int i = 0; i < 26; i++)
+                if (ints1[i] != ints2[i]) break;
+                else if (i == 25) return true;
+        }
+        return false;
+    }
 
     // 1078. Bigram 分词
     public String[] findOcurrences(String text, String first, String second) {
