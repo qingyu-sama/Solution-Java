@@ -1430,9 +1430,6 @@ public class Solution {
 
     // region 二叉树题
 
-    // 230. 二叉搜索树中第K小的元素
-    private int kthSmallest, kthSmallestAns;
-
     // 236. 二叉树的最近公共祖先
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null || root == p || root == q) return root;
@@ -1461,6 +1458,9 @@ public class Solution {
         minDiffInBSTRoot = root;
         minDiffInDFS(root.right);
     }
+
+    // 230. 二叉搜索树中第K小的元素
+    private int kthSmallest, kthSmallestAns;
 
     // 230. 二叉搜索树中第K小的元素
     public int kthSmallest(TreeNode root, int k) {
