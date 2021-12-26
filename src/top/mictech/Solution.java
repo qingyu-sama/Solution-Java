@@ -1430,6 +1430,35 @@ public class Solution {
 
     // region 二叉树题
 
+    // 236. 二叉树的最近公共祖先
+    private int lowestCommonAncestorDeep = -1, lowestCommonAncestorTargetP, lowestCommonAncestorTargetQ;
+    private TreeNode lowestCommonAncestorAns;
+
+    // 236. 二叉树的最近公共祖先
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        lowestCommonAncestorTargetP = p.val;
+        lowestCommonAncestorTargetQ = q.val;
+        lowestCommonAncestorDFS(root, 0);
+        return lowestCommonAncestorAns;
+    }
+
+    private void lowestCommonAncestorDFS(TreeNode root, int deep) {
+        if (root == null) return;
+        if (lowestCommonAncestorDFS(root, true) && lowestCommonAncestorDFS(root, false) && deep > lowestCommonAncestorDeep) {
+            lowestCommonAncestorDeep = deep;
+            lowestCommonAncestorAns = root;
+        }
+        lowestCommonAncestorDFS(root.left, deep + 1);
+        lowestCommonAncestorDFS(root.right, deep + 1);
+    }
+
+    private boolean lowestCommonAncestorDFS(TreeNode root, boolean pq) {
+        if (root == null) return false;
+        if ((pq && root.val == lowestCommonAncestorTargetP) || (!pq && root.val == lowestCommonAncestorTargetQ))
+            return true;
+        return lowestCommonAncestorDFS(root.left, pq) || lowestCommonAncestorDFS(root.right, pq);
+    }
+
     // 783. 二叉搜索树节点最小距离
     private TreeNode minDiffInBSTRoot = null;
     private int minDiffInBSTAns = Integer.MAX_VALUE;
