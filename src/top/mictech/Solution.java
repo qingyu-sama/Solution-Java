@@ -1430,16 +1430,17 @@ public class Solution {
 
     // region 二叉树题
 
-    // 236. 二叉树的最近公共祖先
-    private Map<TreeNode, TreeNode> lowestCommonAncestorMap;
     // 230. 二叉搜索树中第K小的元素
     private int kthSmallest, kthSmallestAns;
 
     // 236. 二叉树的最近公共祖先
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        lowestCommonAncestorMap = new HashMap<>();
-        lowestCommonAncestorDFS(root, p);
-        return lowestCommonAncestorDFS(root, q);
+        if (root == null || root == p || root == q) return root;
+        TreeNode l = lowestCommonAncestor(root.left, p, q);
+        TreeNode r = lowestCommonAncestor(root.right, p, q);
+        if (l == null) return r;
+        if (r == null) return l;
+        return root;
     }
 
     // 783. 二叉搜索树节点最小距离
@@ -1459,24 +1460,6 @@ public class Solution {
             minDiffInBSTAns = Math.min(minDiffInBSTAns, Math.abs(minDiffInBSTRoot.val - root.val));
         minDiffInBSTRoot = root;
         minDiffInDFS(root.right);
-    }
-
-    private TreeNode lowestCommonAncestorDFS(TreeNode root, TreeNode p) {
-        if (root == null) return null;
-        if (root == p) return root;
-        TreeNode treeNode = lowestCommonAncestorDFS(root.left, p);
-        if (treeNode != null) {
-            if (lowestCommonAncestorMap.containsKey(treeNode)) return treeNode;
-            lowestCommonAncestorMap.put(treeNode, root);
-            return root;
-        }
-        treeNode = lowestCommonAncestorDFS(root.right, p);
-        if (treeNode != null) {
-            if (lowestCommonAncestorMap.containsKey(treeNode)) return treeNode;
-            lowestCommonAncestorMap.put(treeNode, root);
-            return root;
-        }
-        return null;
     }
 
     // 230. 二叉搜索树中第K小的元素
