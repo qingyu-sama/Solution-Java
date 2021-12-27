@@ -72,6 +72,22 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 841. 钥匙和房间
+    public boolean canVisitAllRooms(List<List<Integer>> rooms) {
+        boolean[] bs = new boolean[rooms.size()];
+        canVisitAllRoomsDFS(rooms, bs, 0);
+        for (boolean b : bs)
+            if (!b) return false;
+        return true;
+    }
+
+    private void canVisitAllRoomsDFS(List<List<Integer>> rooms, boolean[] bs, int p) {
+        if (bs[p]) return;
+        bs[p] = true;
+        for (Integer i : rooms.get(p))
+            canVisitAllRoomsDFS(rooms, bs, i);
+    }
+
     // 567. 字符串的排列
     public boolean checkInclusion(String s1, String s2) {
         if (s1.length() > s2.length()) return false;
