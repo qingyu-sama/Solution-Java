@@ -72,6 +72,17 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 1557. 可以到达所有点的最少点数目
+    public List<Integer> findSmallestSetOfVertices(int n, List<List<Integer>> edges) {
+        boolean[] bs = new boolean[n];
+        for (List<Integer> list : edges)
+            bs[list.get(1)] = true;
+        List<Integer> list = new LinkedList<>();
+        for (int i = 0; i < n; i++)
+            if (!bs[i]) list.add(i);
+        return list;
+    }
+
     // 841. 钥匙和房间
     public boolean canVisitAllRooms(List<List<Integer>> rooms) {
         boolean[] bs = new boolean[rooms.size()];
