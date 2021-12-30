@@ -8,7 +8,7 @@ class test {
     public static void main(String[] args) {
         Solution solution = new Solution();
         long ns = System.nanoTime(), ms = System.currentTimeMillis();
-        System.out.println(new Solution().checkInclusion("az", "abcza"));
+        System.out.println(solution.checkInclusion("az", "abcza"));
         ns = System.nanoTime() - ns;
         ms = System.currentTimeMillis() - ms;
         System.out.println(ms);
@@ -1421,6 +1421,26 @@ public class Solution {
     // endregion
 
     // region 链表题
+
+    // 21. 合并两个有序链表
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        if (list1 == null && list2 == null) return null;
+        if (list1 == null) return list2;
+        if (list2 == null) return list1;
+        ListNode nd = new ListNode(0), ans = nd;
+        while (list1 != null && list2 != null) {
+            if (list1.val <= list2.val) {
+                nd.next = list1;
+                list1 = list1.next;
+            } else {
+                nd.next = list2;
+                list2 = list2.next;
+            }
+            nd = nd.next;
+        }
+        nd.next = list1 == null ? list2 : list1;
+        return ans.next;
+    }
 
     // 2. 两数相加
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
