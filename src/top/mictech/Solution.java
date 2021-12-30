@@ -72,6 +72,17 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 1995. 统计特殊四元组
+    public int countQuadruplets(int[] nums) {
+        int ans = 0, len = nums.length;
+        for (int i = 0; i < len; i++)
+            for (int j = i + 1; j < len; j++)
+                for (int k = j + 1; k < len; k++)
+                    for (int l = k + 1; l < len; l++)
+                        if (nums[i] + nums[j] + nums[k] == nums[l]) ans++;
+        return ans;
+    }
+
     // 1557. 可以到达所有点的最少点数目
     public List<Integer> findSmallestSetOfVertices(int n, List<List<Integer>> edges) {
         boolean[] bs = new boolean[n];
@@ -1424,7 +1435,7 @@ public class Solution {
 
     // 206. 反转链表
     public ListNode reverseList(ListNode head) {
-        ListNode l1 = head, l2 = head;
+        ListNode l1, l2 = head;
         while (l2 != null && l2.next != null) {
             l1 = l2.next;
             l2.next = l2.next.next;
