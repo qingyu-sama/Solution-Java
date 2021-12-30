@@ -1422,6 +1422,18 @@ public class Solution {
 
     // region 链表题
 
+    // 206. 反转链表
+    public ListNode reverseList(ListNode head) {
+        ListNode l1 = head, l2 = head;
+        while (l2 != null && l2.next != null) {
+            l1 = l2.next;
+            l2.next = l2.next.next;
+            l1.next = head;
+            head = l1;
+        }
+        return head;
+    }
+
     // 21. 合并两个有序链表
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         if (list1 == null && list2 == null) return null;
