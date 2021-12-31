@@ -72,6 +72,11 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 507. 完美数
+    public boolean checkPerfectNumber(int num) {
+        return num == 6 || num == 28 || num == 496 || num == 8128 || num == 33550336;
+    }
+
     // 1995. 统计特殊四元组
     public int countQuadruplets(int[] nums) {
         int ans = 0, len = nums.length;
