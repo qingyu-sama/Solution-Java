@@ -72,6 +72,17 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 2022. 将一维数组转变成二维数组
+    public int[][] construct2DArray(int[] original, int m, int n) {
+        if (original.length != m * n) return new int[0][0];
+        int p = 0;
+        int[][] ans = new int[m][n];
+        for (int[] is : ans)
+            for (int i = 0; i < is.length; i++)
+                is[i] = original[p++];
+        return ans;
+    }
+
     // 507. 完美数
     public boolean checkPerfectNumber(int num) {
         return num == 6 || num == 28 || num == 496 || num == 8128 || num == 33550336;
