@@ -72,6 +72,16 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 191. 位1的个数
+    public int hammingWeight(int n) {
+        int ans = 0;
+        while (n != 0) {
+            n &= n - 1;
+            ans++;
+        }
+        return ans;
+    }
+
     // 231. 2 的幂
     public boolean isPowerOfTwo(int n) {
         return n > 0 && (n & -n) == n;
