@@ -86,16 +86,12 @@ public class Solution {
             return;
         }
         char c = s.charAt(idx);
-        if (c >= 'A' && c <= 'Z') c += 32;
-        if (c >= 'a' && c <= 'z') {
-            sb.append(c);
-            letterCasePermutationDFS(list, sb, s, idx + 1);
-            sb.setLength(idx);
-            c -= 32;
-            sb.append(c);
-            letterCasePermutationDFS(list, sb, s, idx + 1);
-            sb.setLength(idx);
-        } else {
+        sb.append(c);
+        letterCasePermutationDFS(list, sb, s, idx + 1);
+        sb.setLength(idx);
+        if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) {
+            if (c > 'Z') c -= 32;
+            else c += 32;
             sb.append(c);
             letterCasePermutationDFS(list, sb, s, idx + 1);
             sb.setLength(idx);
