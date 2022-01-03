@@ -72,6 +72,36 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 784. 字母大小写全排列
+    public List<String> letterCasePermutation(String s) {
+        List<String> list = new LinkedList<>();
+        StringBuilder sb = new StringBuilder();
+        letterCasePermutationDFS(list, sb, s, 0);
+        return list;
+    }
+
+    private void letterCasePermutationDFS(List<String> list, StringBuilder sb, String s, int idx) {
+        if (idx == s.length()) {
+            list.add(sb.toString());
+            return;
+        }
+        char c = s.charAt(idx);
+        if (c >= 'A' && c <= 'Z') c += 32;
+        if (c >= 'a' && c <= 'z') {
+            sb.append(c);
+            letterCasePermutationDFS(list, sb, s, idx + 1);
+            sb.setLength(idx);
+            c -= 32;
+            sb.append(c);
+            letterCasePermutationDFS(list, sb, s, idx + 1);
+            sb.setLength(idx);
+        } else {
+            sb.append(c);
+            letterCasePermutationDFS(list, sb, s, idx + 1);
+            sb.setLength(idx);
+        }
+    }
+
     // 77. 组合
     public List<List<Integer>> combine(int n, int k) {
         List<List<Integer>> lists = new LinkedList<>();
