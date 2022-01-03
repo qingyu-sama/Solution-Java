@@ -72,6 +72,26 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 77. 组合
+    public List<List<Integer>> combine(int n, int k) {
+        List<List<Integer>> lists = new LinkedList<>();
+        LinkedList<Integer> list = new LinkedList<>();
+        for (int i = 1; i <= n; i++)
+            combineDFS(lists, list, i, n, k);
+        return lists;
+    }
+
+    private void combineDFS(List<List<Integer>> lists, LinkedList<Integer> list, int p, int m, int c) {
+        list.addLast(p);
+        if (list.size() == c) {
+            lists.add(new ArrayList<>(list));
+            list.removeLast();
+            return;
+        }
+        while (++p <= m) combineDFS(lists, list, p, m, c);
+        list.removeLast();
+    }
+
     // 1185. 一周中的第几天
     public String dayOfTheWeek(int day, int month, int year) {
         final String[] week = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
