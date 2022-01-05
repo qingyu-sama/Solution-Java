@@ -3,6 +3,7 @@ package top.mictech;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.function.ToIntFunction;
 
 class test {
     public static void main(String[] args) {
@@ -71,6 +72,18 @@ class Node {
 
 public class Solution {
     // region 一般题
+
+    // 2011. 执行操作后的变量值
+    public int finalValueAfterOperations(String[] operations) {
+        Map<String, ToIntFunction<Integer>> map = new HashMap<>();
+        map.put("X++", a -> a + 1);
+        map.put("++X", a -> a + 1);
+        map.put("X--", a -> a - 1);
+        map.put("--X", a -> a - 1);
+        int x = 0;
+        for (String s : operations) x = map.get(s).applyAsInt(x);
+        return x;
+    }
 
     // 1576. 替换所有的问号
     public String modifyString(String s) {
