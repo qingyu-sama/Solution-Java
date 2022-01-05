@@ -72,6 +72,21 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 1576. 替换所有的问号
+    public String modifyString(String s) {
+        char c = 'a';
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < s.length(); i++)
+            if (s.charAt(i) == '?') {
+                char l = i > 0 ? s.charAt(i - 1) : '?';
+                char r = i < s.length() - 1 ? s.charAt(i + 1) : '?';
+                while (c == l || c == r) if (++c > 'z') c = 'a';
+                sb.append(c);
+                if (++c > 'z') c = 'a';
+            } else sb.append(s.charAt(i));
+        return sb.toString();
+    }
+
     // 784. 字母大小写全排列
     public List<String> letterCasePermutation(String s) {
         List<String> list = new LinkedList<>();
