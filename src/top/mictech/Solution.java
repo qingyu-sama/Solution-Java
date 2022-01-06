@@ -73,6 +73,34 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 71. 简化路径
+    public String simplifyPath(String path) {
+        LinkedList<String> list = new LinkedList<>();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < path.length(); i++) {
+            char c = path.charAt(i);
+            if (c == '/') {
+                if (sb.length() > 0)
+                    list.addLast(sb.toString());
+                sb.setLength(0);
+            } else if (c == '.') {
+                while (i < path.length() && path.charAt(i) != '/')
+                    sb.append(path.charAt(i++));
+                if (sb.length() > 2) list.addLast(sb.toString());
+                else if (sb.length() == 2 && sb.charAt(1) == '.' && !list.isEmpty())
+                    list.removeLast();
+                sb.setLength(0);
+                i--;
+            } else sb.append(c);
+        }
+        if (sb.length() > 0) list.addLast(sb.toString());
+        if (list.isEmpty()) return "/";
+        sb.setLength(0);
+        for (String s : list)
+            sb.append('/').append(s);
+        return sb.toString();
+    }
+
     // 2011. 执行操作后的变量值
     public int finalValueAfterOperations(String[] operations) {
         Map<String, ToIntFunction<Integer>> map = new HashMap<>();
