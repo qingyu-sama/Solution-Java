@@ -73,6 +73,20 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 986. 区间列表的交集
+    public int[][] intervalIntersection(int[][] firstList, int[][] secondList) {
+        LinkedList<int[]> list = new LinkedList<>();
+        int p1 = 0, p2 = 0;
+        while (p1 < firstList.length && p2 < secondList.length) {
+            int l = Math.max(firstList[p1][0], secondList[p2][0]);
+            int r = Math.min(firstList[p1][1], secondList[p2][1]);
+            if (l <= r) list.addLast(new int[]{l, r});
+            if (firstList[p1][1] < secondList[p2][1]) p1++;
+            else p2++;
+        }
+        return list.toArray(new int[list.size()][]);
+    }
+
     // 1614. 括号的最大嵌套深度
     public int maxDepth(String s) {
         int n = 0, ans = 0;
