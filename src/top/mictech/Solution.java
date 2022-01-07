@@ -717,18 +717,25 @@ public class Solution {
 
     // 844. 比较含退格的字符串
     public boolean backspaceCompare(String s, String t) {
-        Stack<Character> s1 = new Stack<>();
-        Stack<Character> t1 = new Stack<>();
-        for (char c : s.toCharArray())
-            if (c != '#') s1.push(c);
-            else if (!s1.empty()) s1.pop();
-        for (char c : t.toCharArray())
-            if (c != '#') t1.push(c);
-            else if (!t1.empty()) t1.pop();
-        if (s1.size() != t1.size()) return false;
-        while (!s1.empty() && !t1.empty())
-            if (s1.pop() != t1.pop()) return false;
-        return s1.empty() && t1.empty();
+        int p1 = s.length() - 1, p2 = t.length() - 1;
+        int d1 = 0, d2 = 0;
+        while (p1 >= 0 || p2 >= 0) {
+            char c1 = p1 >= 0 ? s.charAt(p1) : '?';
+            char c2 = p2 >= 0 ? t.charAt(p2) : '?';
+            if (d1 == 0 && d2 == 0 && c1 != '#' && c2 != '#') {
+                if (c1 != c2) return false;
+                p1--;
+                p2--;
+            } else {
+                if (c1 == '#' || d1 > 0) p1--;
+                if (c1 == '#') d1++;
+                else if (d1 > 0) d1--;
+                if (c2 == '#' || d2 > 0) p2--;
+                if (c2 == '#') d2++;
+                else if (d2 > 0) d2--;
+            }
+        }
+        return true;
     }
 
     // 797. 所有可能的路径
