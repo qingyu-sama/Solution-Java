@@ -73,6 +73,16 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 1614. 括号的最大嵌套深度
+    public int maxDepth(String s) {
+        int n = 0, ans = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '(') ans = Math.max(++n, ans);
+            else if (s.charAt(i) == ')') n--;
+        }
+        return ans;
+    }
+
     // 71. 简化路径
     public String simplifyPath(String path) {
         LinkedList<String> list = new LinkedList<>();
