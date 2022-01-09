@@ -73,6 +73,23 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 547. 省份数量
+    public int findCircleNum(int[][] isConnected) {
+        boolean[] bs = new boolean[isConnected.length];
+        int ans = 0;
+        for (int i = 0; i < bs.length; i++)
+            if (findCircleNumDFS(isConnected, bs, i)) ans++;
+        return ans;
+    }
+
+    private boolean findCircleNumDFS(int[][] isConnected, boolean[] bs, int p) {
+        if (bs[p]) return false;
+        bs[p] = true;
+        for (int i = 0; i < isConnected.length; i++)
+            if (isConnected[i][p] == 1 && isConnected[p][i] == 1) findCircleNumDFS(isConnected, bs, i);
+        return true;
+    }
+
     // 438. 找到字符串中所有字母异位词
     public List<Integer> findAnagrams(String s, String p) {
         if (s.length() < p.length()) return new ArrayList<>();
