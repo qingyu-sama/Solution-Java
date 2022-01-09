@@ -73,6 +73,21 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 1629. 按键持续时间最长的键
+    public char slowestKey(int[] releaseTimes, String keysPressed) {
+        int time = 0, ans = 0;
+        char c = 'a';
+        for (int i = 0; i < releaseTimes.length; i++) {
+            releaseTimes[i] -= time;
+            if (releaseTimes[i] > ans || (releaseTimes[i] == ans && keysPressed.charAt(i) > c)) {
+                ans = releaseTimes[i];
+                c = keysPressed.charAt(i);
+            }
+            time += releaseTimes[i];
+        }
+        return c;
+    }
+
     // 986. 区间列表的交集
     public int[][] intervalIntersection(int[][] firstList, int[][] secondList) {
         LinkedList<int[]> list = new LinkedList<>();
