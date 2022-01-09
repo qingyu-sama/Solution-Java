@@ -73,6 +73,19 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 162. 寻找峰值
+    public int findPeakElement(int[] nums) {
+        int l = 0, m = 0, r = nums.length - 1;
+        while (l <= r) {
+            m = l + r >> 1;
+            if ((m == 0 || nums[m - 1] < nums[m]) && (m == nums.length - 1 || nums[m + 1] < nums[m]))
+                return m;
+            else if (m > 0 && nums[m - 1] > nums[m]) r = m - 1;
+            else l = m + 1;
+        }
+        return m;
+    }
+
     // 547. 省份数量
     public int findCircleNum(int[][] isConnected) {
         boolean[] bs = new boolean[isConnected.length];
