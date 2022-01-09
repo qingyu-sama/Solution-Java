@@ -73,6 +73,26 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 438. 找到字符串中所有字母异位词
+    public List<Integer> findAnagrams(String s, String p) {
+        if (s.length() < p.length()) return new ArrayList<>();
+        int[] ints = new int[26], ints1 = new int[26];
+        for (int i = 0; i < p.length(); i++) {
+            ints[p.charAt(i) - 97]++;
+            ints1[s.charAt(i) - 97]++;
+        }
+        List<Integer> list = new LinkedList<>();
+        if (Arrays.equals(ints, ints1)) list.add(0);
+        for (int i = 0, r = p.length(); r < s.length(); ) {
+            int p1 = s.charAt(i++) - 97, p2 = s.charAt(r++) - 97;
+            ints1[p1]--;
+            ints1[p2]++;
+            if (ints[p1] == ints1[p1] && ints[p2] == ints1[p2] && Arrays.equals(ints, ints1))
+                list.add(i);
+        }
+        return list;
+    }
+
     // 1629. 按键持续时间最长的键
     public char slowestKey(int[] releaseTimes, String keysPressed) {
         int time = 0, ans = 0;
