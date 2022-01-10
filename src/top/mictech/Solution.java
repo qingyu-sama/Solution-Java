@@ -1768,6 +1768,18 @@ public class Solution {
 
     // region 二叉树题
 
+    // 572. 另一棵树的子树
+    public boolean isSubtree(TreeNode root, TreeNode subRoot) {
+        if (root == null) return false;
+        return isSubtreeDFS(root, subRoot) || isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
+    }
+
+    private boolean isSubtreeDFS(TreeNode root, TreeNode subRoot) {
+        if (root == null && subRoot == null) return true;
+        if (root == null || subRoot == null || root.val != subRoot.val) return false;
+        return isSubtreeDFS(root.left, subRoot.left) && isSubtreeDFS(root.right, subRoot.right);
+    }
+
     // 236. 二叉树的最近公共祖先
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null || root == p || root == q) return root;
