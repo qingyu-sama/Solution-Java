@@ -1771,7 +1771,7 @@ public class Solution {
     // 572. 另一棵树的子树
     public boolean isSubtree(TreeNode root, TreeNode subRoot) {
         if (root == null) return false;
-        return isSubtreeDFS(root, subRoot) || isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
+        return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot) || isSubtreeDFS(root, subRoot);
     }
 
     private boolean isSubtreeDFS(TreeNode root, TreeNode subRoot) {
