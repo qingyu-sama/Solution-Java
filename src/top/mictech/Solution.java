@@ -1768,6 +1768,25 @@ public class Solution {
 
     // region 二叉树题
 
+    // 117. 填充每个节点的下一个右侧节点指针 II
+    public Node connect(Node root) {
+        List<Node> list = new ArrayList<>();
+        connectDFS(root, list, 0);
+        return root;
+    }
+
+    private void connectDFS(Node root, List<Node> list, int deep) {
+        if (root == null) return;
+        if (deep == list.size()) list.add(root);
+        else {
+            list.get(deep).next = root;
+            list.set(deep, root);
+        }
+        deep++;
+        connectDFS(root.left, list, deep);
+        connectDFS(root.right, list, deep);
+    }
+
     // 572. 另一棵树的子树
     public boolean isSubtree(TreeNode root, TreeNode subRoot) {
         if (root == null) return false;
