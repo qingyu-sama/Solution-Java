@@ -73,6 +73,17 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 334. 递增的三元子序列
+    public boolean increasingTriplet(int[] nums) {
+        if (nums.length < 3) return false;
+        int min1 = Integer.MAX_VALUE, min2 = min1;
+        for (int i : nums)
+            if (i <= min1) min1 = i;
+            else if (i <= min2) min2 = i;
+            else return true;
+        return false;
+    }
+
     // 162. 寻找峰值
     public int findPeakElement(int[] nums) {
         int l = 0, m = 0, r = nums.length - 1;
