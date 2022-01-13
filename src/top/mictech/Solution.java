@@ -9,7 +9,7 @@ class test {
     public static void main(String[] args) {
         Solution solution = new Solution();
         long ns = System.nanoTime(), ms = System.currentTimeMillis();
-        System.out.println(solution.findAnagrams("baa", "aa"));
+        System.out.println(solution.dominantIndex(new int[]{3, 6, 1, 0}));
         ns = System.nanoTime() - ns;
         ms = System.currentTimeMillis() - ms;
         System.out.println(ms);
@@ -72,6 +72,19 @@ class Node {
 
 public class Solution {
     // region 一般题
+
+    // 747. 至少是其他数字两倍的最大数
+    public int dominantIndex(int[] nums) {
+        int max1 = 0, max2 = 0, idx = 0;
+        for (int i = 0; i < nums.length; i++)
+            if (nums[i] >= max1) {
+                max2 = max1;
+                max1 = nums[i];
+                idx = i;
+            } else if (nums[i] > max2) max2 = nums[i];
+        if (max1 >= max2 * 2) return idx;
+        else return -1;
+    }
 
     // 334. 递增的三元子序列
     public boolean increasingTriplet(int[] nums) {
@@ -1621,9 +1634,7 @@ public class Solution {
         for (int i = 1; i < numRows; i++) {
             l.clear();
             l.add(1);
-            for (int j = 1; j < i; j++) {
-                l.add(list.get(i - 1).get(j - 1) + list.get(i - 1).get(j));
-            }
+            for (int j = 1; j < i; j++) l.add(list.get(i - 1).get(j - 1) + list.get(i - 1).get(j));
             l.add(1);
             list.add(new ArrayList<>(l));
         }
@@ -1639,9 +1650,8 @@ public class Solution {
         for (int i = 0; i < rowIndex; i++) {
             l2.clear();
             l2.add(1);
-            for (int j = 0; j < i; j++) {
+            for (int j = 0; j < i; j++)
                 l2.add(l1.get(j) + l1.get(j + 1));
-            }
             l2.add(1);
             l1 = new ArrayList<>(l2);
         }
@@ -1672,16 +1682,12 @@ public class Solution {
         for (int i = 0; i < grid.length; i++)
             for (int j : grid[i])
                 h[i] = Math.max(h[i], j);
-        for (int i = 0; i < grid[0].length; i++) {
-            for (int j = 0; j < grid.length; j++) {
+        for (int i = 0; i < grid[0].length; i++)
+            for (int j = 0; j < grid.length; j++)
                 w[i] = Math.max(grid[j][i], w[i]);
-            }
-        }
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[0].length; j++) {
+        for (int i = 0; i < grid.length; i++)
+            for (int j = 0; j < grid[0].length; j++)
                 c += (Math.min(h[i], w[j]) - grid[i][j]);
-            }
-        }
         return c;
     }
 
