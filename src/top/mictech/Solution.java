@@ -73,6 +73,42 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 1091. 二进制矩阵中的最短路径(未完成，超内存限制)
+    public int shortestPathBinaryMatrix(int[][] grid) {
+        Stack<int[]> stack1 = new Stack<>();
+        Stack<int[]> stack2 = new Stack<>();
+        int range = 0;
+        if (grid[0][0] == 0) stack1.add(new int[]{0, 0});
+        while (!stack1.isEmpty()) {
+            range++;
+            while (!stack1.isEmpty()) {
+                int[] pos = stack1.pop();
+                if (pos[0] == grid.length - 1 && pos[1] == grid[0].length - 1) return range;
+                grid[pos[0]][pos[1]] = range;
+                if (pos[0] > 0 && grid[pos[0] - 1][pos[1]] == 0)
+                    stack2.add(new int[]{pos[0] - 1, pos[1]});
+                if (pos[1] > 0 && grid[pos[0]][pos[1] - 1] == 0)
+                    stack2.add(new int[]{pos[0], pos[1] - 1});
+                if (pos[0] < grid.length - 1 && grid[pos[0] + 1][pos[1]] == 0)
+                    stack2.add(new int[]{pos[0] + 1, pos[1]});
+                if (pos[1] < grid[0].length - 1 && grid[pos[0]][pos[1] + 1] == 0)
+                    stack2.add(new int[]{pos[0], pos[1] + 1});
+                if (pos[0] > 0 && pos[1] > 0 && grid[pos[0] - 1][pos[1] - 1] == 0)
+                    stack2.add(new int[]{pos[0] - 1, pos[1] - 1});
+                if (pos[0] < grid.length - 1 && pos[1] > 0 && grid[pos[0] + 1][pos[1] - 1] == 0)
+                    stack2.add(new int[]{pos[0] + 1, pos[1] - 1});
+                if (pos[0] > 0 && pos[1] < grid[0].length - 1 && grid[pos[0] - 1][pos[1] + 1] == 0)
+                    stack2.add(new int[]{pos[0] - 1, pos[1] + 1});
+                if (pos[0] < grid.length - 1 && pos[1] < grid[0].length - 1 && grid[pos[0] + 1][pos[1] + 1] == 0)
+                    stack2.add(new int[]{pos[0] + 1, pos[1] + 1});
+            }
+            final Stack<int[]> stack = stack2;
+            stack2 = stack1;
+            stack1 = stack;
+        }
+        return -1;
+    }
+
     // 747. 至少是其他数字两倍的最大数
     public int dominantIndex(int[] nums) {
         int max1 = 0, max2 = 0, idx = 0;
