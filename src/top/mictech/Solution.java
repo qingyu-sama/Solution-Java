@@ -1860,6 +1860,22 @@ public class Solution {
 
     // region 二叉树题
 
+    // 103. 二叉树的锯齿形层序遍历
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> lists = new ArrayList<>();
+        zigzagLevelOrderDFS(root, lists, 0);
+        return lists;
+    }
+
+    private void zigzagLevelOrderDFS(TreeNode root, List<List<Integer>> lists, int deep) {
+        if (root == null) return;
+        if (lists.size() == deep) lists.add(new LinkedList<>());
+        if (deep % 2 == 0) lists.get(deep).add(root.val);
+        else lists.get(deep).add(0, root.val);
+        zigzagLevelOrderDFS(root.left, lists, ++deep);
+        zigzagLevelOrderDFS(root.right, lists, deep);
+    }
+
     // 104. 二叉树的最大深度
     public int maxDepth(TreeNode root) {
         if (root == null) return 0;
