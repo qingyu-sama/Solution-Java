@@ -73,6 +73,25 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 31. 下一个排列
+    public void nextPermutation(int[] nums) {
+        int p1 = nums.length - 1, p2 = p1 + 1;
+        while (p1 > 0) if (nums[p1] > nums[--p1]) break;
+        while (--p2 > 0) if (nums[p2] > nums[p1]) break;
+        int l = 0, r = nums.length - 1;
+        if (p1 != p2) {
+            l = p1 + 1;
+            int temp = nums[p1];
+            nums[p1] = nums[p2];
+            nums[p2] = temp;
+        }
+        while (l < r) {
+            int temp = nums[l];
+            nums[l++] = nums[r];
+            nums[r--] = temp;
+        }
+    }
+
     // 1716. 计算力扣银行的钱
     public int totalMoney(int n) {
         int a = n / 7, b = n % 7;
