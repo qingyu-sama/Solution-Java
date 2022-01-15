@@ -98,38 +98,52 @@ public class Solution {
         return ((49 + a * 7) * a + (a * 2 + b + 1) * b) >> 1;
     }
 
-    // 1091. 二进制矩阵中的最短路径(未完成，超内存限制)
+    // 1091. 二进制矩阵中的最短路径
     public int shortestPathBinaryMatrix(int[][] grid) {
-        Stack<int[]> stack1 = new Stack<>();
-        Stack<int[]> stack2 = new Stack<>();
-        int range = 0;
-        if (grid[0][0] == 0) stack1.add(new int[]{0, 0});
-        while (!stack1.isEmpty()) {
-            range++;
-            while (!stack1.isEmpty()) {
-                int[] pos = stack1.pop();
-                if (pos[0] == grid.length - 1 && pos[1] == grid[0].length - 1) return range;
-                grid[pos[0]][pos[1]] = range;
-                if (pos[0] > 0 && grid[pos[0] - 1][pos[1]] == 0)
-                    stack2.add(new int[]{pos[0] - 1, pos[1]});
-                if (pos[1] > 0 && grid[pos[0]][pos[1] - 1] == 0)
-                    stack2.add(new int[]{pos[0], pos[1] - 1});
-                if (pos[0] < grid.length - 1 && grid[pos[0] + 1][pos[1]] == 0)
-                    stack2.add(new int[]{pos[0] + 1, pos[1]});
-                if (pos[1] < grid[0].length - 1 && grid[pos[0]][pos[1] + 1] == 0)
-                    stack2.add(new int[]{pos[0], pos[1] + 1});
-                if (pos[0] > 0 && pos[1] > 0 && grid[pos[0] - 1][pos[1] - 1] == 0)
-                    stack2.add(new int[]{pos[0] - 1, pos[1] - 1});
-                if (pos[0] < grid.length - 1 && pos[1] > 0 && grid[pos[0] + 1][pos[1] - 1] == 0)
-                    stack2.add(new int[]{pos[0] + 1, pos[1] - 1});
-                if (pos[0] > 0 && pos[1] < grid[0].length - 1 && grid[pos[0] - 1][pos[1] + 1] == 0)
-                    stack2.add(new int[]{pos[0] - 1, pos[1] + 1});
-                if (pos[0] < grid.length - 1 && pos[1] < grid[0].length - 1 && grid[pos[0] + 1][pos[1] + 1] == 0)
-                    stack2.add(new int[]{pos[0] + 1, pos[1] + 1});
+        LinkedList<int[]> list = new LinkedList<>();
+        if (grid[0][0] == 0) {
+            grid[0][0] = 1;
+            list.add(new int[]{0, 0});
+        }
+        while (!list.isEmpty()) {
+            int c = list.size();
+            while (--c >= 0) {
+                int[] pos = list.removeFirst();
+                if (pos[0] == grid.length - 1 && pos[1] == grid[0].length - 1) return grid[pos[0]][pos[1]];
+                final int range = grid[pos[0]][pos[1]] + 1;
+                if (pos[0] > 0 && grid[pos[0] - 1][pos[1]] == 0) {
+                    grid[pos[0] - 1][pos[1]] = range;
+                    list.add(new int[]{pos[0] - 1, pos[1]});
+                }
+                if (pos[1] > 0 && grid[pos[0]][pos[1] - 1] == 0) {
+                    grid[pos[0]][pos[1] - 1] = range;
+                    list.add(new int[]{pos[0], pos[1] - 1});
+                }
+                if (pos[0] < grid.length - 1 && grid[pos[0] + 1][pos[1]] == 0) {
+                    grid[pos[0] + 1][pos[1]] = range;
+                    list.add(new int[]{pos[0] + 1, pos[1]});
+                }
+                if (pos[1] < grid[0].length - 1 && grid[pos[0]][pos[1] + 1] == 0) {
+                    grid[pos[0]][pos[1] + 1] = range;
+                    list.add(new int[]{pos[0], pos[1] + 1});
+                }
+                if (pos[0] > 0 && pos[1] > 0 && grid[pos[0] - 1][pos[1] - 1] == 0) {
+                    grid[pos[0] - 1][pos[1] - 1] = range;
+                    list.add(new int[]{pos[0] - 1, pos[1] - 1});
+                }
+                if (pos[0] < grid.length - 1 && pos[1] > 0 && grid[pos[0] + 1][pos[1] - 1] == 0) {
+                    grid[pos[0] + 1][pos[1] - 1] = range;
+                    list.add(new int[]{pos[0] + 1, pos[1] - 1});
+                }
+                if (pos[0] > 0 && pos[1] < grid[0].length - 1 && grid[pos[0] - 1][pos[1] + 1] == 0) {
+                    grid[pos[0] - 1][pos[1] + 1] = range;
+                    list.add(new int[]{pos[0] - 1, pos[1] + 1});
+                }
+                if (pos[0] < grid.length - 1 && pos[1] < grid[0].length - 1 && grid[pos[0] + 1][pos[1] + 1] == 0) {
+                    grid[pos[0] + 1][pos[1] + 1] = range;
+                    list.add(new int[]{pos[0] + 1, pos[1] + 1});
+                }
             }
-            final Stack<int[]> stack = stack2;
-            stack2 = stack1;
-            stack1 = stack;
         }
         return -1;
     }
