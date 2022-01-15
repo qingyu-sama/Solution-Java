@@ -1846,6 +1846,17 @@ public class Solution {
 
     // region 二叉树题
 
+    // 104. 二叉树的最大深度
+    public int maxDepth(TreeNode root) {
+        if (root == null) return 0;
+        return Math.max(maxDepthDFS(root.left, 1), maxDepthDFS(root.right, 1));
+    }
+
+    private int maxDepthDFS(TreeNode root, int deep) {
+        if (root == null) return deep;
+        return Math.max(maxDepthDFS(root.left, ++deep), maxDepthDFS(root.right, deep));
+    }
+
     // 111. 二叉树的最小深度
     public int minDepth(TreeNode root) {
         LinkedList<TreeNode> list = new LinkedList<>();
