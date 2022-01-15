@@ -1846,6 +1846,28 @@ public class Solution {
 
     // region 二叉树题
 
+    // 111. 二叉树的最小深度
+    public int minDepth(TreeNode root) {
+        LinkedList<TreeNode> list = new LinkedList<>();
+        if (root != null) {
+            root.val = 1;
+            list.addLast(root);
+        }
+        while (!list.isEmpty()) {
+            final TreeNode node = list.removeFirst();
+            if (node.left == null && node.right == null) return node.val;
+            if (node.left != null) {
+                node.left.val = node.val + 1;
+                list.addLast(node.left);
+            }
+            if (node.right != null) {
+                node.right.val = node.val + 1;
+                list.addLast(node.right);
+            }
+        }
+        return 0;
+    }
+
     // 107. 二叉树的层序遍历 II
     public List<List<Integer>> levelOrderBottom(TreeNode root) {
         List<List<Integer>> lists = new ArrayList<>();
