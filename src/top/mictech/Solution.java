@@ -1998,7 +1998,7 @@ public class Solution {
         levelOrderDFS(lists, deep + 1, root.right);
     }
 
-    // 117. 填充每个节点的下一个右侧节点指针 II
+    // 116. 填充每个节点的下一个右侧节点指针 117. 填充每个节点的下一个右侧节点指针 II
     public Node connect(Node root) {
         List<Node> list = new ArrayList<>();
         connectDFS(root, list, 0);
