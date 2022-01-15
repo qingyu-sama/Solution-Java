@@ -1848,33 +1848,17 @@ public class Solution {
 
     // 102. 二叉树的层序遍历
     public List<List<Integer>> levelOrder(TreeNode root) {
-        Deque<TreeNode> deque = new LinkedList<>();
-        int count = 0;
-        if (root != null) {
-            deque.add(root);
-            count++;
-        }
-        final List<List<Integer>> lists = new LinkedList<>();
-        while (!deque.isEmpty()) {
-            final List<Integer> list = new LinkedList<>();
-            int temp = 0;
-            while (count > 0) {
-                final TreeNode node = deque.pop();
-                list.add(node.val);
-                if (node.left != null) {
-                    deque.add(node.left);
-                    temp++;
-                }
-                if (node.right != null) {
-                    deque.add(node.right);
-                    temp++;
-                }
-                count--;
-            }
-            lists.add(list);
-            count = temp;
-        }
+        List<List<Integer>> lists = new ArrayList<>();
+        levelOrderDFS(lists, 0, root);
         return lists;
+    }
+
+    private void levelOrderDFS(List<List<Integer>> lists, int deep, TreeNode root) {
+        if (root == null) return;
+        if (deep == lists.size()) lists.add(new LinkedList<>());
+        lists.get(deep).add(root.val);
+        levelOrderDFS(lists, deep + 1, root.left);
+        levelOrderDFS(lists, deep + 1, root.right);
     }
 
     // 117. 填充每个节点的下一个右侧节点指针 II
