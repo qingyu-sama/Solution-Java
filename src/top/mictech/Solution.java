@@ -1846,10 +1846,84 @@ public class Solution {
 
     // region 二叉树题
 
+    // 107. 二叉树的层序遍历 II
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> lists = new ArrayList<>();
+        // DFS代码
+        levelOrderBottomDFS(lists, 0, root);
+        // BFS代码
+//        Deque<TreeNode> deque = new LinkedList<>();
+//        int count = 0;
+//        if (root != null) {
+//            deque.add(root);
+//            count++;
+//        }
+//        while (!deque.isEmpty()) {
+//            final List<Integer> list = new LinkedList<>();
+//            int temp = 0;
+//            while (count > 0) {
+//                final TreeNode node = deque.pop();
+//                list.add(node.val);
+//                if (node.left != null) {
+//                    deque.add(node.left);
+//                    temp++;
+//                }
+//                if (node.right != null) {
+//                    deque.add(node.right);
+//                    temp++;
+//                }
+//                count--;
+//            }
+//            lists.add(list);
+//            count = temp;
+//        }
+        for (int l = 0, r = lists.size() - 1; l < r; ) {
+            final List<Integer> list = lists.get(l);
+            lists.set(l++, lists.get(r));
+            lists.set(r--, list);
+        }
+        return lists;
+    }
+
+    private void levelOrderBottomDFS(List<List<Integer>> lists, int deep, TreeNode root) {
+        if (root == null) return;
+        if (deep == lists.size()) lists.add(new LinkedList<>());
+        lists.get(deep).add(root.val);
+        levelOrderBottomDFS(lists, deep + 1, root.left);
+        levelOrderBottomDFS(lists, deep + 1, root.right);
+    }
+
     // 102. 二叉树的层序遍历
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> lists = new ArrayList<>();
+        // DFS代码
         levelOrderDFS(lists, 0, root);
+        // BFS代码
+//        Deque<TreeNode> deque = new LinkedList<>();
+//        int count = 0;
+//        if (root != null) {
+//            deque.add(root);
+//            count++;
+//        }
+//        while (!deque.isEmpty()) {
+//            final List<Integer> list = new LinkedList<>();
+//            int temp = 0;
+//            while (count > 0) {
+//                final TreeNode node = deque.pop();
+//                list.add(node.val);
+//                if (node.left != null) {
+//                    deque.add(node.left);
+//                    temp++;
+//                }
+//                if (node.right != null) {
+//                    deque.add(node.right);
+//                    temp++;
+//                }
+//                count--;
+//            }
+//            lists.add(list);
+//            count = temp;
+//        }
         return lists;
     }
 
