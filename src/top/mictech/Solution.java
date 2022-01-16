@@ -73,6 +73,25 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 3. 无重复字符的最长子串
+    public int lengthOfLongestSubstring(String s) {
+        if (s.length() == 0) return 0;
+        boolean[] bs = new boolean[256];
+        int ans = 1, max = 1, p = 0;
+        bs[s.charAt(0)] = true;
+        for (int i = 1; i < s.length(); i++)
+            if (bs[s.charAt(i)]) {
+                while (s.charAt(p++) != s.charAt(i)) {
+                    bs[s.charAt(p - 1)] = false;
+                    max--;
+                }
+            } else {
+                bs[s.charAt(i)] = true;
+                ans = Math.max(ans, ++max);
+            }
+        return ans;
+    }
+
     // 31. 下一个排列
     public void nextPermutation(int[] nums) {
         int p1 = nums.length - 1, p2 = p1 + 1;
