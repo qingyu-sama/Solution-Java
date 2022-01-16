@@ -1770,6 +1770,25 @@ public class Solution {
 
     // region 链表题
 
+    // 382. 链表随机节点
+    private ListNode getRandomHead;
+    private Random getRandomRandom;
+
+    public Solution(ListNode head) {
+        getRandomHead = head;
+        getRandomRandom = new Random();
+    }
+
+    public int getRandom() {
+        int ans = 0, i = 1;
+        ListNode node = getRandomHead;
+        while (node != null) {
+            if (getRandomRandom.nextInt(i++) == 0) ans = node.val;
+            node = node.next;
+        }
+        return ans;
+    }
+
     // 206. 反转链表
     public ListNode reverseList(ListNode head) {
         ListNode l1, l2 = head;
@@ -2142,6 +2161,10 @@ public class Solution {
     }
 
     // endregion
+
+    public Solution() {
+
+    }
 }
 
 // region 数据结构设计题
