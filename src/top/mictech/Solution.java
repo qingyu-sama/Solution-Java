@@ -76,19 +76,14 @@ public class Solution {
     // 3. 无重复字符的最长子串
     public int lengthOfLongestSubstring(String s) {
         if (s.length() == 0) return 0;
-        boolean[] bs = new boolean[256];
-        int ans = 1, max = 1, p = 0;
-        bs[s.charAt(0)] = true;
-        for (int i = 1; i < s.length(); i++)
-            if (bs[s.charAt(i)]) {
-                while (s.charAt(p++) != s.charAt(i)) {
-                    bs[s.charAt(p - 1)] = false;
-                    max--;
-                }
-            } else {
-                bs[s.charAt(i)] = true;
-                ans = Math.max(ans, ++max);
-            }
+        Map<Character, Integer> map = new HashMap<>();
+        int ans = 0;
+        for (int start = 0, end = 0; end < s.length(); end++) {
+            char c = s.charAt(end);
+            if (map.containsKey(c)) start = Math.max(map.get(c), start);
+            ans = Math.max(ans, end - start + 1);
+            map.put(s.charAt(end), end + 1);
+        }
         return ans;
     }
 
