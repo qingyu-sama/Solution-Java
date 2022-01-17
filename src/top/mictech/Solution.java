@@ -2185,27 +2185,30 @@ public class Solution {
 
 // 380. O(1) 时间插入、删除和获取随机元素
 class RandomizedSet {
-    private Set<Integer> set;
+    private Map<Integer, Integer> map;
     private List<Integer> list;
     private Random random;
 
     public RandomizedSet() {
-        set = new HashSet<>();
+        map = new HashMap<>();
         list = new ArrayList<>();
         random = new Random();
     }
 
     public boolean insert(int val) {
-        if (set.contains(val)) return false;
+        if (map.containsKey(val)) return false;
+        map.put(val, list.size());
         list.add(val);
-        set.add(val);
         return true;
     }
 
     public boolean remove(int val) {
-        if (!set.contains(val)) return false;
-        list.remove((Integer) val);
-        set.remove(val);
+        if (!map.containsKey(val)) return false;
+        final int idx = list.size() - 1, num = list.get(idx);
+        list.set(map.get(val), num);
+        list.remove(idx);
+        map.put(num, map.get(val));
+        map.remove(val);
         return true;
     }
 
