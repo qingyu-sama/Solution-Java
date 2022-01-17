@@ -2183,6 +2183,37 @@ public class Solution {
 
 // region 数据结构设计题
 
+// 380. O(1) 时间插入、删除和获取随机元素
+class RandomizedSet {
+    private Set<Integer> set;
+    private List<Integer> list;
+    private Random random;
+
+    public RandomizedSet() {
+        set = new HashSet<>();
+        list = new ArrayList<>();
+        random = new Random();
+    }
+
+    public boolean insert(int val) {
+        if (set.contains(val)) return false;
+        list.add(val);
+        set.add(val);
+        return true;
+    }
+
+    public boolean remove(int val) {
+        if (!set.contains(val)) return false;
+        list.remove((Integer) val);
+        set.remove(val);
+        return true;
+    }
+
+    public int getRandom() {
+        return list.get(random.nextInt(list.size()));
+    }
+}
+
 // 155. 最小栈
 class MinStack {
     private Node head;
