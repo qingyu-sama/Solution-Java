@@ -1906,6 +1906,30 @@ public class Solution {
 
     // region 二叉树题
 
+    // 235. 二叉搜索树的最近公共祖先
+    public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
+        Set<TreeNode> set = new HashSet<>();
+        lowestCommonAncestorDFS(root, set, p);
+        return lowestCommonAncestorDFS(root, q, set);
+    }
+
+    private void lowestCommonAncestorDFS(TreeNode root, Set<TreeNode> set, TreeNode p) {
+        set.add(root);
+        if (root == p) return;
+        if (root.val > p.val) lowestCommonAncestorDFS(root.left, set, p);
+        else lowestCommonAncestorDFS(root.right, set, p);
+    }
+
+    private TreeNode lowestCommonAncestorDFS(TreeNode root, TreeNode q, Set<TreeNode> set) {
+        TreeNode result = null;
+        if (set.contains(root)) result = root;
+        if (root == q) return result;
+        TreeNode temp = null;
+        if (root.val > q.val) temp = lowestCommonAncestorDFS(root.left, q, set);
+        else temp = lowestCommonAncestorDFS(root.right, q, set);
+        return temp == null ? result : temp;
+    }
+
     // 103. 二叉树的锯齿形层序遍历
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         List<List<Integer>> lists = new ArrayList<>();
