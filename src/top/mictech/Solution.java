@@ -1809,6 +1809,23 @@ public class Solution {
 
     // region 链表题
 
+    // 148. 排序链表
+    public ListNode sortList(ListNode head) {
+        PriorityQueue<ListNode> pq = new PriorityQueue<>(Comparator.comparingInt(node -> node.val));
+        while (head != null) {
+            pq.add(head);
+            head = head.next;
+        }
+        head = new ListNode(0);
+        ListNode ans = head;
+        while (!pq.isEmpty()) {
+            head.next = pq.poll();
+            head = head.next;
+        }
+        head.next = null;
+        return ans.next;
+    }
+
     // 382. 链表随机节点
     private ListNode getRandomHead;
     private Random getRandomRandom;
