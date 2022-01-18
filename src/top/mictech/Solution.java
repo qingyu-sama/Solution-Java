@@ -73,6 +73,18 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 215. 数组中的第K个最大元素
+    public int findKthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for (int i : nums)
+            if (pq.size() < k) pq.add(i);
+            else if (i > pq.peek()) {
+                pq.poll();
+                pq.add(i);
+            }
+        return pq.peek();
+    }
+
     // 539. 最小时间差
     public int findMinDifference(List<String> timePoints) {
         if (timePoints.size() > 1440) return 0;
