@@ -73,6 +73,19 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 539. 最小时间差
+    public int findMinDifference(List<String> timePoints) {
+        if (timePoints.size() > 1440) return 0;
+        int[] ms = new int[timePoints.size()];
+        int i = 0;
+        for (String s : timePoints)
+            ms[i++] = ((s.charAt(0) - '0') * 10 + (s.charAt(1) - '0')) * 60 + (s.charAt(3) - '0') * 10 + (s.charAt(4) - '0');
+        Arrays.sort(ms);
+        i = ms[0] + 1440 - ms[ms.length - 1];
+        for (int j = 1; j < ms.length; j++) i = Math.min(ms[j] - ms[j - 1], i);
+        return i;
+    }
+
     // 3. 无重复字符的最长子串
     public int lengthOfLongestSubstring(String s) {
         if (s.length() == 0) return 0;
