@@ -73,6 +73,16 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 219. 存在重复元素 II
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0, p = 0; i < nums.length; i++) {
+            if (i > k) set.remove(nums[p++]);
+            if (!set.add(nums[i])) return true;
+        }
+        return false;
+    }
+
     // 215. 数组中的第K个最大元素
     public int findKthLargest(int[] nums, int k) {
         PriorityQueue<Integer> pq = new PriorityQueue<>();
