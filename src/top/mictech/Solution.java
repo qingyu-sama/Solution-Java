@@ -73,6 +73,11 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 231. 2 的幂
+    public boolean isPowerOfTwo(int n) {
+        return n > 0 && (n & (n - 1)) == 0;
+    }
+
     // 292. Nim 游戏
     public boolean canWinNim(int n) {
         return n % 4 != 0;
@@ -440,11 +445,6 @@ public class Solution {
             ans++;
         }
         return ans;
-    }
-
-    // 231. 2 的幂
-    public boolean isPowerOfTwo(int n) {
-        return n > 0 && (n & -n) == n;
     }
 
     // 2022. 将一维数组转变成二维数组
