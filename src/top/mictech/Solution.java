@@ -75,10 +75,10 @@ public class Solution {
 
     // 219. 存在重复元素 II
     public boolean containsNearbyDuplicate(int[] nums, int k) {
-        Set<Integer> set = new HashSet<>();
-        for (int i = 0, p = 0; i < nums.length; i++) {
-            if (i > k) set.remove(nums[p++]);
-            if (!set.add(nums[i])) return true;
+        HashMap<Integer, Integer> map = new HashMap<>(nums.length);
+        for (int i = 0; i < nums.length; i++) {
+            Integer idx = map.put(nums[i], i);
+            if (idx != null && i - idx <= k) return true;
         }
         return false;
     }
