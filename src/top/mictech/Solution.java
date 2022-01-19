@@ -73,6 +73,11 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 292. Nim 游戏
+    public boolean canWinNim(int n) {
+        return n % 4 != 0;
+    }
+
     // 219. 存在重复元素 II
     public boolean containsNearbyDuplicate(int[] nums, int k) {
         HashMap<Integer, Integer> map = new HashMap<>(nums.length);
