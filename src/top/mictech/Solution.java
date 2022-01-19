@@ -2248,6 +2248,77 @@ public class Solution {
 
 // region 数据结构设计题
 
+// 146. LRU 缓存
+class LRUCache {
+    private int maxSize;
+    private int listSize;
+    private HashMap<Integer, Integer> map;
+    private ListNode head;
+    private ListNode tail;
+
+    public LRUCache(int capacity) {
+        map = new HashMap<>();
+        maxSize = capacity;
+        listSize = 0;
+    }
+
+    public int get(int key) {
+        if (!map.containsKey(key)) return -1;
+        remove(key);
+        add(key);
+        return map.get(key);
+    }
+
+    public void put(int key, int value) {
+        if (map.put(key, value) != null) remove(key);
+        add(key);
+        if (listSize > maxSize) map.remove(removeLast());
+    }
+
+    private void add(int val) {
+        ListNode node = new ListNode(val, null);
+        if (tail == null) {
+            head = node;
+            tail = node;
+        } else {
+            tail.next = node;
+            tail = tail.next;
+        }
+        listSize++;
+    }
+
+    private void remove(int val) {
+        ListNode node = head;
+        if (node.val == val) {
+            head = head.next;
+            node.next = null;
+            if (head == null) tail = null;
+        } else {
+            while (node.next.val != val) node = node.next;
+            node.next = node.next.next;
+            if (node.next == null) tail = node;
+        }
+        listSize--;
+    }
+
+    private int removeLast() {
+        int result = head.val;
+        head = head.next;
+        listSize--;
+        return result;
+    }
+
+    private static class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
+    }
+}
+
 // 380. O(1) 时间插入、删除和获取随机元素
 class RandomizedSet {
     private Map<Integer, Integer> map;
