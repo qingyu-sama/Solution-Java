@@ -73,6 +73,13 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 2029. 石子游戏 IX
+    public boolean stoneGameIX(int[] stones) {
+        int[] nums = new int[3];
+        for (int i : stones) nums[i % 3]++;
+        return nums[0] % 2 == 0 ? !(nums[1] == 0 || nums[2] == 0) : !(Math.abs(nums[1] - nums[2]) <= 2);
+    }
+
     // 231. 2 的幂
     public boolean isPowerOfTwo(int n) {
         return n > 0 && (n & (n - 1)) == 0;
