@@ -73,6 +73,27 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 1945. 字符串转化后的各位数字之和
+    public int getLucky(String s, int k) {
+        int ans = 0, n, temp;
+        for (int i = 0; i < s.length(); i++) {
+            n = s.charAt(i) - 96;
+            while (n != 0) {
+                ans += n % 10;
+                n /= 10;
+            }
+        }
+        while (ans >= 10 && --k > 0) {
+            temp = 0;
+            while (ans != 0) {
+                temp += ans % 10;
+                ans /= 10;
+            }
+            ans = temp;
+        }
+        return ans;
+    }
+
     // 2029. 石子游戏 IX
     public boolean stoneGameIX(int[] stones) {
         int[] nums = new int[3];
