@@ -73,6 +73,13 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 1332. 删除回文子序列
+    public int removePalindromeSub(String s) {
+        int l = 0, r = s.length() - 1;
+        while (l < r) if (s.charAt(l++) != s.charAt(r--)) return 2;
+        return 1;
+    }
+
     // 1945. 字符串转化后的各位数字之和
     public int getLucky(String s, int k) {
         int ans = 0, n, temp;
