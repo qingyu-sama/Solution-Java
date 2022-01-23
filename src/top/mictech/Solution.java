@@ -2283,6 +2283,42 @@ public class Solution {
 
 // region 数据结构设计题
 
+// 2034. 股票价格波动
+class StockPrice {
+    private int cur;
+    private HashMap<Integer, Integer> hashMap;
+    private TreeMap<Integer, Integer> treeMap;
+
+    public StockPrice() {
+        hashMap = new HashMap<>();
+        treeMap = new TreeMap<>();
+        cur = 0;
+    }
+
+    public void update(int timestamp, int price) {
+        if (hashMap.containsKey(timestamp)) {
+            int prev = hashMap.get(timestamp);
+            int c = treeMap.get(prev);
+            if (c == 1) treeMap.remove(prev);
+            else treeMap.put(prev, c - 1);
+        } else cur = Math.max(cur, timestamp);
+        hashMap.put(timestamp, price);
+        treeMap.put(price, treeMap.getOrDefault(price, 0) + 1);
+    }
+
+    public int current() {
+        return hashMap.get(cur);
+    }
+
+    public int maximum() {
+        return treeMap.lastKey();
+    }
+
+    public int minimum() {
+        return treeMap.firstKey();
+    }
+}
+
 // 146. LRU 缓存
 class LRUCache {
     private int maxSize;
