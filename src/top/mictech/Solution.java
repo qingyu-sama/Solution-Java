@@ -73,6 +73,25 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 1905. 统计子岛屿
+    public int countSubIslands(int[][] grid1, int[][] grid2) {
+        int ans = 0;
+        for (int i = 0; i < grid2.length; i++)
+            for (int j = 0; j < grid2[i].length; j++)
+                if (grid2[i][j] == 1 && countSubIslandsDFS(grid1, grid2, i, j) == 1)
+                    ans++;
+        return ans;
+    }
+
+    private int countSubIslandsDFS(int[][] parent, int[][] grid, int i, int j) {
+        if (i < 0 || j < 0 || i == grid.length || j == grid[i].length || grid[i][j] == 0) return 1;
+        grid[i][j] = 0;
+        return parent[i][j] & countSubIslandsDFS(parent, grid, i + 1, j) &
+                countSubIslandsDFS(parent, grid, i - 1, j) &
+                countSubIslandsDFS(parent, grid, i, j + 1) &
+                countSubIslandsDFS(parent, grid, i, j - 1);
+    }
+
     // 1332. 删除回文子序列
     public int removePalindromeSub(String s) {
         int l = 0, r = s.length() - 1;
