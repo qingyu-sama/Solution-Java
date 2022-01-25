@@ -73,6 +73,11 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 1688. 比赛中的配对次数
+    public int numberOfMatches(int n) {
+        return n - 1;
+    }
+
     // 1905. 统计子岛屿
     public int countSubIslands(int[][] grid1, int[][] grid2) {
         int ans = 0;
