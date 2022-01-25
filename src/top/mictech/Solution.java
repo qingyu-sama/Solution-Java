@@ -75,7 +75,7 @@ public class Solution {
 
     // 1688. 比赛中的配对次数
     public int numberOfMatches(int n) {
-        return n - 1;
+        return --n;
     }
 
     // 1905. 统计子岛屿
