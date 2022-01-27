@@ -73,6 +73,40 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 2047. 句子中的有效单词数
+    public int countValidWords(String sentence) {
+        int ans = 0, len = sentence.length();
+        boolean igone = false, line = false;
+        if (sentence.charAt(0) == ' ') igone = true;
+        for (int i = 0; i < len; i++) {
+            char c = sentence.charAt(i);
+            if (c == ' ') {
+                if (i == len - 1 || sentence.charAt(i + 1) != ' ') {
+                    if (!igone) ans++;
+                    igone = false;
+                    line = false;
+                }
+                continue;
+            }
+            if (igone) continue;
+            if (c == '-') {
+                if (line || i == 0 || i == len - 1 || sentence.charAt(i - 1) < 'a' || sentence.charAt(i - 1) > 'z' || sentence.charAt(i + 1) < 'a' || sentence.charAt(i + 1) > 'z') {
+                    igone = true;
+                    continue;
+                }
+                line = true;
+            }
+            if ((c >= '0' && c <= '9') ||
+                    ((c == '!' || c == '.' || c == ',') &&
+                            ((i > 0 && (sentence.charAt(i - 1) != ' ' && (sentence.charAt(i - 1) < 'a' || sentence.charAt(i - 1) > 'z'))) || (i < len - 1 && sentence.charAt(i + 1) != ' ')))
+            ) {
+                igone = true;
+            }
+        }
+        if (!igone && sentence.charAt(len - 1) != ' ') ans++;
+        return ans;
+    }
+
     // 1688. 比赛中的配对次数
     public int numberOfMatches(int n) {
         return --n;
