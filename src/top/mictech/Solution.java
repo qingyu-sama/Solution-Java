@@ -75,14 +75,18 @@ public class Solution {
 
     // 1996. 游戏中弱角色的数量
     public int numberOfWeakCharacters(int[][] properties) {
-        Arrays.sort(properties, (a, b) -> a[0] == b[0] ? b[1] - a[1] : b[0] - a[0]);
-        int ans = 0;
-        for (int i = 0, max = properties[0][1], j; i < properties.length; ) {
-            for (j = i; j < properties.length && properties[j][0] == properties[i][0]; j++)
-                if (properties[j][1] < max && i != 0) ans++;
-            max = Math.max(max, properties[i][1]);
-            i = j;
+        int maxA = 0;
+        for (int[] is : properties) maxA = Math.max(maxA, is[0]);
+        int[] ds = new int[maxA + 1];
+        for (int[] is : properties) ds[is[0]] = Math.max(ds[is[0]], is[1]);
+        int maxD = 0;
+        for (int i = maxA; i >= 0; i--) {
+            int t = maxD;
+            if (ds[i] > maxD) maxD = ds[i];
+            ds[i] = t;
         }
+        int ans = 0;
+        for (int[] is : properties) if (is[0] < maxA && is[1] < ds[is[0]]) ans++;
         return ans;
     }
 
