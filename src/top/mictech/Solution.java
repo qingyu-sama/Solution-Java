@@ -73,6 +73,19 @@ class Node {
 public class Solution {
     // region 一般题
 
+    // 1996. 游戏中弱角色的数量
+    public int numberOfWeakCharacters(int[][] properties) {
+        Arrays.sort(properties, (a, b) -> a[0] == b[0] ? b[1] - a[1] : b[0] - a[0]);
+        int ans = 0;
+        for (int i = 0, max = properties[0][1], j; i < properties.length; ) {
+            for (j = i; j < properties.length && properties[j][0] == properties[i][0]; j++)
+                if (properties[j][1] < max && i != 0) ans++;
+            max = Math.max(max, properties[i][1]);
+            i = j;
+        }
+        return ans;
+    }
+
     // 2047. 句子中的有效单词数
     public int countValidWords(String sentence) {
         int ans = 0, len = sentence.length();
