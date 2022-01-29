@@ -71,7 +71,33 @@ class Node {
 //endregion
 
 public class Solution {
+    private static int[][] VECTOR = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+
     // region 一般题
+
+    // 1765. 地图中的最高点
+    public int[][] highestPeak(int[][] isWater) {
+        int w = isWater.length, h = isWater[0].length;
+        Deque<int[]> deque = new ArrayDeque<>();
+        for (int i = 0; i < w; i++)
+            for (int j = 0; j < h; j++)
+                if (isWater[i][j] == 1) {
+                    deque.add(new int[]{i, j});
+                    isWater[i][j] = 0;
+                } else isWater[i][j] = -1;
+        while (!deque.isEmpty()) {
+            int[] pos = deque.poll();
+            int range = isWater[pos[0]][pos[1]] + 1;
+            for (int[] is : VECTOR) {
+                int i = pos[0] + is[0];
+                int j = pos[1] + is[1];
+                if (i < 0 || j < 0 || i == w || j == h || isWater[i][j] != -1) continue;
+                isWater[i][j] = range;
+                deque.add(new int[]{i, j});
+            }
+        }
+        return isWater;
+    }
 
     // 1996. 游戏中弱角色的数量
     public int numberOfWeakCharacters(int[][] properties) {
