@@ -75,6 +75,13 @@ public class Solution {
 
     // region 一般题
 
+    // 1342. 将数字变成 0 的操作次数
+    public int numberOfSteps(int num) {
+        int ans = 0;
+        while (num != 0 && ++ans > 0) num = num % 2 == 0 ? num >> 1 : num - 1;
+        return ans;
+    }
+
     // 884. 两句话中的不常见单词
     public String[] uncommonFromSentences(String s1, String s2) {
         Set<String> set = new HashSet<>();
