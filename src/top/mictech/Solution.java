@@ -75,6 +75,25 @@ public class Solution {
 
     // region 一般题
 
+    // 884. 两句话中的不常见单词
+    public String[] uncommonFromSentences(String s1, String s2) {
+        Set<String> set = new HashSet<>();
+        Set<String> doNot = new HashSet<>();
+        for (String s : s1.split(" ")) {
+            if (!doNot.contains(s) && !set.add(s)) {
+                set.remove(s);
+                doNot.add(s);
+            }
+        }
+        for (String s : s2.split(" ")) {
+            if (!doNot.contains(s) && !set.add(s)) {
+                set.remove(s);
+                doNot.add(s);
+            }
+        }
+        return set.toArray(new String[set.size()]);
+    }
+
     // 1765. 地图中的最高点
     public int[][] highestPeak(int[][] isWater) {
         int w = isWater.length, h = isWater[0].length;
