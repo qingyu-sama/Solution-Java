@@ -75,6 +75,28 @@ public class Solution {
 
     // region 一般题
 
+    // 1763. 最长的美好子字符串
+    public String longestNiceSubstring(String s) {
+        String str;
+        for (int len = s.length() - 1; len >= 0; len--)
+            for (int i = 0; i < s.length() - len; i++) {
+                str = s.substring(i, i + len + 1);
+                if (longestNiceSubstringCheck(str)) return str;
+            }
+        return "";
+    }
+
+    private boolean longestNiceSubstringCheck(String s) {
+        Set<Character> set = new HashSet<>();
+        for (int i = 0; i < s.length(); i++) set.add(s.charAt(i));
+        for (char c : set) {
+            if (c > 'Z') c -= 32;
+            else c += 32;
+            if (!set.contains(c)) return false;
+        }
+        return true;
+    }
+
     // 1342. 将数字变成 0 的操作次数
     public int numberOfSteps(int num) {
         int ans = 0;
