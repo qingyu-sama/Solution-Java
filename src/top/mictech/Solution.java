@@ -75,6 +75,26 @@ public class Solution {
 
     // region 一般题
 
+    // 2000. 反转单词前缀
+    public String reversePrefix(String word, char ch) {
+        char[] cs = new char[word.length()];
+        for (int i = 0; i < word.length(); i++) {
+            cs[i] = word.charAt(i);
+            if (cs[i] == ch) {
+                int l = 0, r = i;
+                while (l < r) {
+                    final char t = cs[l];
+                    cs[l++] = cs[r];
+                    cs[r--] = t;
+                }
+                for (i++; i < word.length(); i++)
+                    cs[i] = word.charAt(i);
+                return new String(cs);
+            }
+        }
+        return new String(cs);
+    }
+
     // 1763. 最长的美好子字符串
     public String longestNiceSubstring(String s) {
         String str;
