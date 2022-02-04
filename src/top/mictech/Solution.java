@@ -75,6 +75,19 @@ public class Solution {
 
     // region 一般题
 
+    // 744. 寻找比目标字母大的最小字母
+    public char nextGreatestLetter(char[] letters, char target) {
+        if (letters[letters.length - 1] <= target) return letters[0];
+        int l = 0, r = letters.length - 1, m = 0;
+        while (l <= r) {
+            m = l + r >> 1;
+            if (letters[m] > target && (m == 0 || letters[m - 1] <= target)) break;
+            if (letters[m] <= target) l = m + 1;
+            else r = m - 1;
+        }
+        return letters[m];
+    }
+
     // 1217. 玩筹码
     public int minCostToMoveChips(int[] position) {
         Map<Integer, Integer> map = new HashMap<>();
