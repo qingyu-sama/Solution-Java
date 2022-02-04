@@ -75,6 +75,24 @@ public class Solution {
 
     // region 一般题
 
+    // 791. 自定义字符串排序
+    public String customSortString(String S, String T) {
+        int[] chars = new int[26];
+        for (int i = 0; i < T.length(); i++) chars[T.charAt(i) - 'a']++;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < S.length(); i++) {
+            char c = S.charAt(i);
+            int n = chars[c - 'a'];
+            while (n-- > 0) sb.append(c);
+            chars[c - 'a'] = 0;
+        }
+        for (char i = 'a'; i <= 'z'; i++) {
+            int n = chars[i - 'a'];
+            while (n-- > 0) sb.append(i);
+        }
+        return sb.toString();
+    }
+
     // 744. 寻找比目标字母大的最小字母
     public char nextGreatestLetter(char[] letters, char target) {
         if (letters[letters.length - 1] <= target) return letters[0];
