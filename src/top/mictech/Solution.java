@@ -2231,6 +2231,29 @@ public class Solution {
 
     // region 二叉树题
 
+    // 257. 二叉树的所有路径
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> list = new LinkedList<>();
+        LinkedList<Integer> path = new LinkedList<>();
+        binaryTreePathsDFS(root, list, path);
+        return list;
+    }
+
+    private void binaryTreePathsDFS(TreeNode root, List<String> list, LinkedList<Integer> path) {
+        if (root == null) return;
+        path.addLast(root.val);
+        if (root.left == null && root.right == null) {
+            StringBuilder sb = new StringBuilder();
+            for (int i : path) sb.append(i).append('-').append('>');
+            sb.setLength(sb.length() - 2);
+            list.add(sb.toString());
+        } else {
+            binaryTreePathsDFS(root.left, list, path);
+            binaryTreePathsDFS(root.right, list, path);
+        }
+        path.removeLast();
+    }
+
     // 235. 二叉搜索树的最近公共祖先
     public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
         while (true)
