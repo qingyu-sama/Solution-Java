@@ -75,6 +75,19 @@ public class Solution {
 
     // region 一般题
 
+    // 1217. 玩筹码
+    public int minCostToMoveChips(int[] position) {
+        Map<Integer, Integer> map = new HashMap<>();
+        int max = 0, all = 0;
+        for (int i : position) {
+            int c = map.getOrDefault(i, 0) + 1;
+            map.put(i, c);
+            if (c > max) max = c;
+            all++;
+        }
+        return all - max;
+    }
+
     // 1725. 可以形成最大正方形的矩形数目
     public int countGoodRectangles(int[][] rectangles) {
         int max = 0, ans = 0;
