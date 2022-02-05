@@ -75,6 +75,25 @@ public class Solution {
 
     // region 一般题
 
+    // 1219. 黄金矿工
+    public int getMaximumGold(int[][] grid) {
+        int ans = 0;
+        for (int i = 0; i < grid.length; i++)
+            for (int j = 0; j < grid[i].length; j++)
+                if (grid[i][j] != 0) ans = Math.max(ans, getMaximumGoldDFS(grid, i, j));
+        return ans;
+    }
+
+    private int getMaximumGoldDFS(int[][] grid, int i, int j) {
+        if (i < 0 || j < 0 || i == grid.length || j == grid[i].length || grid[i][j] == 0)
+            return 0;
+        int t = grid[i][j];
+        grid[i][j] = 0;
+        int res = Math.max(Math.max(getMaximumGoldDFS(grid, i + 1, j), getMaximumGoldDFS(grid, i - 1, j)), Math.max(getMaximumGoldDFS(grid, i, j + 1), getMaximumGoldDFS(grid, i, j - 1)));
+        grid[i][j] = t;
+        return t + res;
+    }
+
     // 791. 自定义字符串排序
     public String customSortString(String S, String T) {
         int[] chars = new int[26];
