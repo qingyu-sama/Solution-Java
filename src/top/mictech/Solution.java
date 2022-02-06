@@ -75,6 +75,15 @@ public class Solution {
 
     // region 一般题
 
+    // 1748. 唯一元素的和
+    public int sumOfUnique(int[] nums) {
+        int[] ns = new int[101];
+        for (int i : nums) ns[i]++;
+        int ans = 0;
+        for (int i = 0; i < 101; i++) if (ns[i] == 1) ans += i;
+        return ans;
+    }
+
     // 1219. 黄金矿工
     public int getMaximumGold(int[][] grid) {
         int ans = 0;
