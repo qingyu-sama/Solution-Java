@@ -75,6 +75,17 @@ public class Solution {
 
     // region 一般题
 
+    // 面试题 05.06. 整数转换
+    public int convertInteger(int A, int B) {
+        int ans = 0;
+        for (int i = 0; i < 32; i++) {
+            if ((A & 1) != (B & 1)) ans++;
+            A = A >>> 1;
+            B = B >>> 1;
+        }
+        return ans;
+    }
+
     // 1748. 唯一元素的和
     public int sumOfUnique(int[] nums) {
         int[] ns = new int[101];
