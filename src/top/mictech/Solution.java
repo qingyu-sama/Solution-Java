@@ -2144,6 +2144,22 @@ public class Solution {
 
     // region 链表题
 
+    // 817. 链表组件
+    public int numComponents(ListNode head, int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        for (int i : nums) set.add(i);
+        int ans = 0;
+        boolean ignore = false;
+        while (head != null) {
+            if (set.contains(head.val)) {
+                if (!ignore) ans++;
+                ignore = true;
+            } else ignore = false;
+            head = head.next;
+        }
+        return ans;
+    }
+
     // 148. 排序链表
     public ListNode sortList(ListNode head) {
         PriorityQueue<ListNode> pq = new PriorityQueue<>(Comparator.comparingInt(node -> node.val));
