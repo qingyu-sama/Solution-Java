@@ -75,6 +75,17 @@ public class Solution {
 
     // region 一般题
 
+    // 941. 有效的山脉数组
+    public boolean validMountainArray(int[] arr) {
+        int len = arr.length, i;
+        if (len < 3) return false;
+        for (i = 1; i < len; i++)
+            if (arr[i] <= arr[i - 1]) break;
+        if (i == 1 || i == len) return false;
+        while (i < len) if (arr[i - 1] <= arr[i++]) return false;
+        return true;
+    }
+
     // 1021. 删除最外层的括号
     public String removeOuterParentheses(String s) {
         int count = 0, len = s.length();
