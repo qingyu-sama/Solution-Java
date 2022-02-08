@@ -75,6 +75,18 @@ public class Solution {
 
     // region 一般题
 
+    // 1021. 删除最外层的括号
+    public String removeOuterParentheses(String s) {
+        int count = 0, len = s.length();
+        StringBuilder sb = new StringBuilder(len);
+        for (int i = 0; i < len; i++) {
+            if (s.charAt(i) == '(') {
+                if (count++ > 0) sb.append('(');
+            } else if (--count > 0) sb.append(')');
+        }
+        return sb.toString();
+    }
+
     // 1405. 最长快乐字符串
     public String longestDiverseString(int a, int b, int c) {
         PriorityQueue<int[]> pq = new PriorityQueue<>((x, y) -> y[1] - x[1]);
