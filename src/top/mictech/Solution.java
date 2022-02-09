@@ -75,6 +75,18 @@ public class Solution {
 
     // region 一般题
 
+    // 2006. 差的绝对值为 K 的数对数目
+    public int countKDifference(int[] nums, int k) {
+        int[] is = new int[101];
+        int ans = 0;
+        for (int t : nums) {
+            if (t - k >= 1) ans += is[t - k];
+            if (t + k <= 100) ans += is[t + k];
+            is[t]++;
+        }
+        return ans;
+    }
+
     // 941. 有效的山脉数组
     public boolean validMountainArray(int[] arr) {
         int len = arr.length, i;
