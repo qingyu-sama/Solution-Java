@@ -75,6 +75,23 @@ public class Solution {
 
     // region 一般题
 
+    // 1380. 矩阵中的幸运数
+    public List<Integer> luckyNumbers(int[][] matrix) {
+        List<Integer> list = new ArrayList<>();
+        int[] maxH = new int[matrix[0].length], minW = new int[matrix.length];
+        for (int i = 0; i < matrix.length; i++)
+            for (int j = 0; j < matrix[i].length; j++) {
+                int v = matrix[i][j];
+                if (minW[i] == 0) {
+                    minW[i] = Integer.MAX_VALUE;
+                    for (int n : matrix[i]) minW[i] = Math.min(minW[i], n);
+                }
+                if (maxH[j] == 0) for (int[] ints : matrix) maxH[j] = Math.max(maxH[j], ints[j]);
+                if (v <= minW[i] && v >= maxH[j]) list.add(v);
+            }
+        return list;
+    }
+
     // 2006. 差的绝对值为 K 的数对数目
     public int countKDifference(int[] nums, int k) {
         int[] is = new int[101];
