@@ -75,6 +75,14 @@ public class Solution {
 
     // region 一般题
 
+    // 1984. 学生分数的最小差值
+    public int minimumDifference(int[] nums, int k) {
+        Arrays.sort(nums);
+        int len = nums.length - --k, ans = Integer.MAX_VALUE;
+        for (int i = 0; i < len; i++) ans = Math.min(nums[i + k] - nums[i], ans);
+        return ans;
+    }
+
     // 1020. 飞地的数量
     public int numEnclaves(int[][] grid) {
         int len1 = grid.length - 1, len2 = grid[0].length - 1;
