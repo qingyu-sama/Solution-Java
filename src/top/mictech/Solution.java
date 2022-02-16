@@ -75,6 +75,34 @@ public class Solution {
 
     // region 一般题
 
+    // 1189. “气球” 的最大数量
+    public int maxNumberOfBalloons(String text) {
+        int[] is = new int[5];
+        for (int i = 0; i < text.length(); i++)
+            switch (text.charAt(i)) {
+                case 'b':
+                    is[0]++;
+                    break;
+                case 'a':
+                    is[1]++;
+                    break;
+                case 'l':
+                    is[2]++;
+                    break;
+                case 'o':
+                    is[3]++;
+                    break;
+                case 'n':
+                    is[4]++;
+                    break;
+            }
+        is[2] >>= 1;
+        is[3] >>= 1;
+        int ans = 100000;
+        for (int i : is) ans = Math.min(ans, i);
+        return ans;
+    }
+
     // 540. 有序数组中的单一元素
     public int singleNonDuplicate(int[] nums) {
         int l = 0, r = nums.length - 1, m = 0;
