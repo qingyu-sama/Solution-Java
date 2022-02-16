@@ -71,9 +71,32 @@ class Node {
 //endregion
 
 public class Solution {
-    private static int[][] VECTOR = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+    private static final int[][] VECTOR = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
 
     // region 一般题
+
+    // 1020. 飞地的数量
+    public int numEnclaves(int[][] grid) {
+        int len1 = grid.length - 1, len2 = grid[0].length - 1;
+        for (int i = 0; i <= len1; i++) {
+            numEnclavesDFS(grid, i, 0);
+            numEnclavesDFS(grid, i, len2);
+        }
+        for (int i = 0; i <= len2; i++) {
+            numEnclavesDFS(grid, 0, i);
+            numEnclavesDFS(grid, len1, i);
+        }
+        int ans = 0;
+        for (int[] is : grid)
+            for (int i : is) if (i == 1) ans++;
+        return ans;
+    }
+
+    private void numEnclavesDFS(int[][] grid, int i, int j) {
+        if (i < 0 || j < 0 || i == grid.length || j == grid[i].length || grid[i][j] == 0) return;
+        grid[i][j] = 0;
+        for (int[] is : VECTOR) numEnclavesDFS(grid, i + is[0], j + is[1]);
+    }
 
     // 1189. “气球” 的最大数量
     public int maxNumberOfBalloons(String text) {
