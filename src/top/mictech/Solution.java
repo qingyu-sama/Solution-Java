@@ -75,6 +75,21 @@ public class Solution {
 
     // region 一般题
 
+    // 540. 有序数组中的单一元素
+    public int singleNonDuplicate(int[] nums) {
+        int l = 0, r = nums.length - 1, m = 0;
+        while (l <= r) {
+            m = l + r >> 1;
+            if ((m == 0 || nums[m - 1] != nums[m]) && (m == nums.length - 1 || nums[m + 1] != nums[m])) break;
+            if (nums[m + 1] == nums[m])
+                if (m % 2 == 0) l = m + 1;
+                else r = m - 1;
+            else if (m % 2 == 1) l = m + 1;
+            else r = m - 1;
+        }
+        return nums[m];
+    }
+
     // 1380. 矩阵中的幸运数
     public List<Integer> luckyNumbers(int[][] matrix) {
         List<Integer> list = new ArrayList<>();
