@@ -75,6 +75,13 @@ public class Solution {
 
     // region 一般题
 
+    // 1791. 找出星型图的中心节点
+    public int findCenter(int[][] edges) {
+        int a = edges[0][0];
+        if (a == edges[1][0] || a == edges[1][1]) return a;
+        else return edges[0][1];
+    }
+
     // 1984. 学生分数的最小差值
     public int minimumDifference(int[] nums, int k) {
         Arrays.sort(nums);
@@ -2113,9 +2120,7 @@ public class Solution {
     public int reverse(int x) {
         if (x == 0)
             return 0;
-        boolean isNegtive = false;
-        if (x < 0)
-            isNegtive = true;
+        boolean isNegtive = x < 0;
         int res = 0;
         int num = x < 0 ? -x : x;
         while (num != 0) {
@@ -2764,8 +2769,8 @@ public class Solution {
 // 2034. 股票价格波动
 class StockPrice {
     private int cur;
-    private HashMap<Integer, Integer> hashMap;
-    private TreeMap<Integer, Integer> treeMap;
+    private final HashMap<Integer, Integer> hashMap;
+    private final TreeMap<Integer, Integer> treeMap;
 
     public StockPrice() {
         hashMap = new HashMap<>();
@@ -2799,9 +2804,9 @@ class StockPrice {
 
 // 146. LRU 缓存
 class LRUCache {
-    private int maxSize;
+    private final int maxSize;
     private int listSize;
-    private HashMap<Integer, Integer> map;
+    private final HashMap<Integer, Integer> map;
     private ListNode head;
     private ListNode tail;
 
@@ -2870,9 +2875,9 @@ class LRUCache {
 
 // 380. O(1) 时间插入、删除和获取随机元素
 class RandomizedSet {
-    private Map<Integer, Integer> map;
-    private List<Integer> list;
-    private Random random;
+    private final Map<Integer, Integer> map;
+    private final List<Integer> list;
+    private final Random random;
 
     public RandomizedSet() {
         map = new HashMap<>();
