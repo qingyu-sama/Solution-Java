@@ -75,6 +75,31 @@ public class Solution {
 
     // region 一般题
 
+    // 838. 推多米诺
+    public String pushDominoes(String dominoes) {
+        char[] cs = dominoes.toCharArray();
+        int[] time = new int[cs.length];
+        int t = 0;
+        Deque<Integer> deque = new LinkedList<>();
+        for (int i = 0; i < cs.length; i++) if (cs[i] != '.') deque.add(i);
+        while (!deque.isEmpty()) {
+            t++;
+            int size = deque.size();
+            while (size-- > 0) {
+                int i = deque.poll();
+                char c = cs[i];
+                i += c == 'L' ? -1 : 1;
+                if (i >= 0 && i < cs.length)
+                    if (cs[i] == '.') {
+                        cs[i] = c;
+                        time[i] = t;
+                        deque.add(i);
+                    } else if (cs[i] != c && time[i] == t) cs[i] = '.';
+            }
+        }
+        return new String(cs);
+    }
+
     // 717. 1 比特与 2 比特字符
     public boolean isOneBitCharacter(int[] bits) {
         for (int i = 0; i < bits.length; i++)
