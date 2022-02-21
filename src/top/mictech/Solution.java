@@ -75,6 +75,14 @@ public class Solution {
 
     // region 一般题
 
+    // 717. 1 比特与 2 比特字符
+    public boolean isOneBitCharacter(int[] bits) {
+        for (int i = 0; i < bits.length; i++)
+            if (bits[i] == 1) i++;
+            else if (i == bits.length - 1) return true;
+        return false;
+    }
+
     // 1791. 找出星型图的中心节点
     public int findCenter(int[][] edges) {
         int a = edges[0][0];
