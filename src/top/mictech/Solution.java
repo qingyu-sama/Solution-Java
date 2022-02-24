@@ -75,6 +75,19 @@ public class Solution {
 
     // region 一般题
 
+    // 456. 132 模式
+    public boolean find132pattern(int[] nums) {
+        int len = nums.length;
+        if (len < 3) return false;
+        Deque<Integer> deque = new ArrayDeque<>();
+        for (int i = len - 1, k = Integer.MIN_VALUE; i >= 0; i--) {
+            if (nums[i] < k) return true;
+            while (!deque.isEmpty() && deque.peekLast() < nums[i]) k = Math.max(k, deque.pollLast());
+            deque.addLast(nums[i]);
+        }
+        return false;
+    }
+
     // 916. 单词子集
     public List<String> wordSubsets(String[] words1, String[] words2) {
         int[] cs = new int[26];
