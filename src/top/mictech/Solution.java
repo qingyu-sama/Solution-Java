@@ -75,6 +75,28 @@ public class Solution {
 
     // region 一般题
 
+    // 916. 单词子集
+    public List<String> wordSubsets(String[] words1, String[] words2) {
+        int[] cs = new int[26];
+        for (String s : words2) {
+            int[] tmp = new int[26];
+            for (char c : s.toCharArray()) {
+                int i = c - 'a';
+                if (tmp[i]++ == cs[i]) cs[i]++;
+            }
+        }
+        List<String> list = new ArrayList<>();
+        D:
+        for (String s : words1) {
+            int[] ss = new int[26];
+            for (char c : s.toCharArray()) ss[c - 'a']++;
+            for (int i = 0; i < 26; i++)
+                if (cs[i] > ss[i]) continue D;
+            list.add(s);
+        }
+        return list;
+    }
+
     // 1347. 制造字母异位词的最小步骤数
     public int minSteps(String s, String t) {
         int[] ss = new int[133];
