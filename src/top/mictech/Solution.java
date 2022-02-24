@@ -75,6 +75,34 @@ public class Solution {
 
     // region 一般题
 
+    // 542. 01 矩阵
+    public int[][] updateMatrix(int[][] mat) {
+        Deque<int[]> deque = new LinkedList<>();
+        int len1 = mat.length, len2 = mat[0].length;
+        for (int i = 0; i < len1; i++)
+            for (int j = 0; j < len2; j++)
+                if (mat[i][j] == 0) deque.add(new int[]{i, j});
+        int range = 0;
+        boolean[][] zt = new boolean[len1][len2];
+        while (!deque.isEmpty()) {
+            range++;
+            int size = deque.size();
+            while (size-- > 0) {
+                int[] pos = deque.poll();
+                for (int[] v : VECTOR) {
+                    int i = pos[0] + v[0];
+                    int j = pos[1] + v[1];
+                    if (i < 0 || j < 0 || i == len1 || j == len2 || mat[i][j] == 0 || (zt[i][j] && range >= mat[i][j]))
+                        continue;
+                    mat[i][j] = range;
+                    zt[i][j] = true;
+                    deque.add(new int[]{i, j});
+                }
+            }
+        }
+        return mat;
+    }
+
     // LCP 17. 速算机器人
     public int calculate(String s) {
         return (int) Math.pow(2, s.length());
