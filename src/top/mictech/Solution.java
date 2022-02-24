@@ -75,6 +75,11 @@ public class Solution {
 
     // region 一般题
 
+    // LCP 17. 速算机器人
+    public int calculate(String s) {
+        return (int) Math.pow(2, s.length());
+    }
+
     // 456. 132 模式
     public boolean find132pattern(int[] nums) {
         int len = nums.length;
