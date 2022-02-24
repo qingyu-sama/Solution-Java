@@ -75,6 +75,18 @@ public class Solution {
 
     // region 一般题
 
+    // 605. 种花问题
+    public boolean canPlaceFlowers(int[] flowerbed, int n) {
+        for (int i = 0, len = flowerbed.length - 1; i <= len; i++)
+            if (flowerbed[i] == 0) {
+                if (i == len || flowerbed[i + 1] == 0) {
+                    flowerbed[i++] = 1;
+                    n--;
+                }
+            } else i++;
+        return n <= 0;
+    }
+
     // 1437. 是否所有 1 都至少相隔 k 个元素
     public boolean kLengthApart(int[] nums, int k) {
         int p = 0;
