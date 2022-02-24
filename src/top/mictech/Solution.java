@@ -75,6 +75,19 @@ public class Solution {
 
     // region 一般题
 
+    // 1437. 是否所有 1 都至少相隔 k 个元素
+    public boolean kLengthApart(int[] nums, int k) {
+        int p = 0;
+        for (int i : nums)
+            if (i == 1) break;
+            else p++;
+        for (int i = p + 1; i < nums.length; i++)
+            if (nums[i] == 1)
+                if (i - p - 1 < k) return false;
+                else p = i;
+        return true;
+    }
+
     // 1706. 球会落何处
     public int[] findBall(int[][] grid) {
         int w = grid[0].length;
