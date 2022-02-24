@@ -75,6 +75,22 @@ public class Solution {
 
     // region 一般题
 
+    // 1706. 球会落何处
+    public int[] findBall(int[][] grid) {
+        int w = grid[0].length;
+        int[] ans = new int[w];
+        for (int i = 0; i < w; i++)
+            ans[i] = findBallDFS(grid, 0, i);
+        return ans;
+    }
+
+    private int findBallDFS(int[][] grid, int i, int j) {
+        if (i >= grid.length) return j;
+        int p = j + grid[i][j];
+        if (p >= grid[i].length || p < 0 || grid[i][p] != grid[i][j]) return -1;
+        return findBallDFS(grid, i + 1, p);
+    }
+
     // 838. 推多米诺
     public String pushDominoes(String dominoes) {
         char[] cs = dominoes.toCharArray();
