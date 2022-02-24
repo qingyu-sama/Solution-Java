@@ -75,6 +75,16 @@ public class Solution {
 
     // region 一般题
 
+    // 1347. 制造字母异位词的最小步骤数
+    public int minSteps(String s, String t) {
+        int[] ss = new int[133];
+        for (char c : s.toCharArray()) ss[c]++;
+        for (char c : t.toCharArray()) ss[c]--;
+        int ans = 0;
+        for (int i : ss) if (i > 0) ans += i;
+        return ans;
+    }
+
     // 605. 种花问题
     public boolean canPlaceFlowers(int[] flowerbed, int n) {
         for (int i = 0, len = flowerbed.length - 1; i <= len; i++)
