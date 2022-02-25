@@ -75,6 +75,15 @@ public class Solution {
 
     // region 一般题
 
+    // 598. 范围求和 II
+    public int maxCount(int m, int n, int[][] ops) {
+        for (int[] op : ops) {
+            m = Math.min(m, op[0]);
+            n = Math.min(n, op[1]);
+        }
+        return m * n;
+    }
+
     // 1376. 通知所有员工所需的时间
     public int numOfMinutes(int n, int headID, int[] manager, int[] informTime) {
         int[] time = new int[n];
