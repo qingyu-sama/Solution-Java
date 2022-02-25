@@ -75,6 +75,19 @@ public class Solution {
 
     // region 一般题
 
+    // 875. 爱吃香蕉的珂珂
+    public int minEatingSpeed(int[] piles, int h) {
+        int l = 1, r = 1_000_000_000;
+        while (l < r) {
+            int m = l + r >> 1;
+            int n = 0;
+            for (int i : piles) n += (i + m - 1) / m;
+            if (n > h) l = m + 1;
+            else r = m;
+        }
+        return l;
+    }
+
     // 1299. 将每个元素替换为右侧最大元素
     public int[] replaceElements(int[] arr) {
         int max = -1;
