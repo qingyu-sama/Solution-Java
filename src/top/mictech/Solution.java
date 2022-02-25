@@ -75,6 +75,17 @@ public class Solution {
 
     // region 一般题
 
+    // 942. 增减字符串匹配
+    public int[] diStringMatch(String s) {
+        int len = s.length(), min = 0;
+        int[] ints = new int[len + 1];
+        for (int i = 0, max = len; i < len; i++)
+            if (s.charAt(i) == 'I') ints[i] = min++;
+            else ints[i] = max--;
+        ints[len] = min;
+        return ints;
+    }
+
     // 598. 范围求和 II
     public int maxCount(int m, int n, int[][] ops) {
         for (int[] op : ops) {
