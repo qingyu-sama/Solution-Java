@@ -75,6 +75,20 @@ public class Solution {
 
     // region 一般题
 
+    // 205. 同构字符串
+    public boolean isIsomorphic(String s, String t) {
+        Map<Character, Character> map = new HashMap<>();
+        int len = s.length();
+        for (int i = 0; i < len; i++) {
+            char c1 = s.charAt(i), c2 = t.charAt(i);
+            if (!map.containsKey(c1))
+                if (map.containsValue(c2)) return false;
+                else map.put(c1, c2);
+            else if (map.get(c1) != c2) return false;
+        }
+        return true;
+    }
+
     // 537. 复数乘法
     public String complexNumberMultiply(String num1, String num2) {
         String[] ss1 = num1.split("\\+"), ss2 = num2.split("\\+");
