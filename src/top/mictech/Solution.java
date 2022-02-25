@@ -75,6 +75,24 @@ public class Solution {
 
     // region 一般题
 
+    // 1376. 通知所有员工所需的时间
+    public int numOfMinutes(int n, int headID, int[] manager, int[] informTime) {
+        int[] time = new int[n];
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            if (time[i] == 0) numOfMinutesDFS(manager, informTime, time, i);
+            ans = Math.max(ans, time[i]);
+        }
+        return ans;
+    }
+
+    private void numOfMinutesDFS(int[] manager, int[] informTime, int[] time, int p) {
+        int m = manager[p];
+        if (m == -1) return;
+        if (time[m] == 0) numOfMinutesDFS(manager, informTime, time, m);
+        time[p] = time[m] + informTime[m];
+    }
+
     // 875. 爱吃香蕉的珂珂
     public int minEatingSpeed(int[] piles, int h) {
         int l = 1, r = 1_000_000_000;
