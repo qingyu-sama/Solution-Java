@@ -75,6 +75,17 @@ public class Solution {
 
     // region 一般题
 
+    // 1299. 将每个元素替换为右侧最大元素
+    public int[] replaceElements(int[] arr) {
+        int max = -1;
+        for (int i = arr.length - 1, tmp; i >= 0; i--) {
+            tmp = Math.max(max, arr[i]);
+            arr[i] = max;
+            max = tmp;
+        }
+        return arr;
+    }
+
     // 205. 同构字符串
     public boolean isIsomorphic(String s, String t) {
         Map<Character, Character> map = new HashMap<>();
