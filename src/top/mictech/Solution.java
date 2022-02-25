@@ -75,6 +75,15 @@ public class Solution {
 
     // region 一般题
 
+    // 537. 复数乘法
+    public String complexNumberMultiply(String num1, String num2) {
+        String[] ss1 = num1.split("\\+"), ss2 = num2.split("\\+");
+        int a = Integer.parseInt(ss1[0]), b = Integer.parseInt(ss1[1]);
+        int c = Integer.parseInt(ss2[0]), d = Integer.parseInt(ss2[1]);
+        int A = a * c - b * d, B = b * c + a * d;
+        return A + "+" + B + "i";
+    }
+
     // 542. 01 矩阵
     public int[][] updateMatrix(int[][] mat) {
         Deque<int[]> deque = new LinkedList<>();
