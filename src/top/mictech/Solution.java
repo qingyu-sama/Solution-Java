@@ -75,6 +75,17 @@ public class Solution {
 
     // region 一般题
 
+    // 2016. 增量元素之间的最大差值
+    public int maximumDifference(int[] nums) {
+        int ans = -1, n = nums.length;
+        for (int i = n - 1, max = nums[i--]; i >= 0; i--) {
+            int s = nums[i];
+            if (s < max) ans = Math.max(ans, max - s);
+            else max = s;
+        }
+        return ans;
+    }
+
     // 942. 增减字符串匹配
     public int[] diStringMatch(String s) {
         int len = s.length(), min = 0;
