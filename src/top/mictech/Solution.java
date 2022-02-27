@@ -75,6 +75,11 @@ public class Solution {
 
     // region 一般题
 
+    // 319. 灯泡开关
+    public int bulbSwitch(int n) {
+        return (int) Math.sqrt(n);
+    }
+
     // 1389. 按既定顺序创建目标数组
     public int[] createTargetArray(int[] nums, int[] index) {
         int n = nums.length;
