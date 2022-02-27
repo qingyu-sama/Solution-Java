@@ -75,6 +75,21 @@ public class Solution {
 
     // region 一般题
 
+    // 1389. 按既定顺序创建目标数组
+    public int[] createTargetArray(int[] nums, int[] index) {
+        int n = nums.length;
+        ArrayList<Integer> list = new ArrayList<>(n);
+        for (int i = 0; i < n; i++) {
+            list.add(index[i], nums[i]);
+        }
+        int[] ans = new int[n];
+        Iterator<Integer> iterator = list.iterator();
+        for (int i = 0; i < n; i++) {
+            ans[i] = iterator.next();
+        }
+        return ans;
+    }
+
     // 2016. 增量元素之间的最大差值
     public int maximumDifference(int[] nums) {
         int ans = -1, n = nums.length;
