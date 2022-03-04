@@ -75,6 +75,11 @@ public class Solution {
 
     // region 一般题
 
+    // 258. 各位相加
+    public int addDigits(int num) {
+        return (num - 1) % 9 + 1;
+    }
+
     // 319. 灯泡开关
     public int bulbSwitch(int n) {
         return (int) Math.sqrt(n);
