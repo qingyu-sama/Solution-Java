@@ -75,6 +75,20 @@ public class Solution {
 
     // region 一般题
 
+    // 2104. 子数组范围和
+    public long subArrayRanges(int[] nums) {
+        long ans = 0;
+        int len = nums.length;
+        for (int i = 0; i < len; i++) {
+            for (int j = i, min = Integer.MAX_VALUE, max = Integer.MIN_VALUE; j < len; j++) {
+                min = Math.min(min, nums[j]);
+                max = Math.max(max, nums[j]);
+                ans += max - min;
+            }
+        }
+        return ans;
+    }
+
     // 258. 各位相加
     public int addDigits(int num) {
         return (num - 1) % 9 + 1;
