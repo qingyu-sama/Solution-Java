@@ -386,21 +386,11 @@ public class Solution {
         int[] is = new int[5];
         for (int i = 0; i < text.length(); i++)
             switch (text.charAt(i)) {
-                case 'b':
-                    is[0]++;
-                    break;
-                case 'a':
-                    is[1]++;
-                    break;
-                case 'l':
-                    is[2]++;
-                    break;
-                case 'o':
-                    is[3]++;
-                    break;
-                case 'n':
-                    is[4]++;
-                    break;
+                case 'b' -> is[0]++;
+                case 'a' -> is[1]++;
+                case 'l' -> is[2]++;
+                case 'o' -> is[3]++;
+                case 'n' -> is[4]++;
             }
         is[2] >>= 1;
         is[3] >>= 1;
@@ -1893,9 +1883,7 @@ public class Solution {
                 p2--;
             }
         }
-        StringBuilder sb = new StringBuilder();
-        sb.append(chars);
-        return sb.toString();
+        return String.valueOf(chars);
     }
 
     // 509. 斐波那契数
@@ -2170,7 +2158,7 @@ public class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
         for (int[] ints : matrix) {
             for (int i = ints.length - 1; i >= 0; i--) {
-                if (target < ints[i]) ;
+                if (target < ints[i]) continue;
                 else if (ints[i] == target) return true;
                 else break;
             }
@@ -2355,6 +2343,7 @@ public class Solution {
         for (int i = 0; i < length; i++) {
             v = s.substring(i, i + 1);
             if (v.equalsIgnoreCase(" ") && num == 0 && f == null) {
+                continue;
             } else if (v.equalsIgnoreCase("-") && f == null) {
                 f = true;
             } else if (v.equalsIgnoreCase("+") && f == null) {
@@ -2411,10 +2400,8 @@ public class Solution {
         if (length < 3 || length < numRows) return s;
         // 提前声明好变量
         int n, l;
-        // 将字符串储存为字符数组,后面使用效率更高
-        char[] c = s.toCharArray();
         // 最后结果的字符串用StringBuilder生成,避免运行中多次拼接字符串造成额外开销
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder(length);
         // 开始遍历每一行
         for (int i = 0; i < numRows; i++) {
             // 记录当前行第一个字符的起始位置
@@ -2422,18 +2409,18 @@ public class Solution {
             // while循环判断这个位置是否存在
             while (n < length) {
                 // 存在,加入到结果集尾部
-                sb.append(c[n]);
+                sb.append(s.charAt(n));
                 // 记录当前行下一个位置的数字
                 // 不用 numRows * 2 - 2 是因为乘法效率比加法要低
                 n += numRows + numRows - 2;
                 // 排除首行和尾行的情况,因为它们没有斜的一列
                 if (i > 0 && i < numRows - 1) {
                     // 记录当前行在斜列的位置
-                    l = n - i * 2;
+                    l = n - (i << 1);
                     // 判断该位置是否存在字符
                     if (l < length) {
                         // 存在,加入到结果集尾部
-                        sb.append(c[l]);
+                        sb.append(s.charAt(l));
                     }
                 }
             }
@@ -2444,7 +2431,7 @@ public class Solution {
 
     // 1. 两数之和
     public int[] twoSum(int[] nums, int target) {
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        Map<Integer, Integer> map = new HashMap<>();
         int i;
         for (i = 0; i < nums.length; i++)
             if (map.containsKey(target - nums[i])) break;
@@ -2559,8 +2546,8 @@ public class Solution {
             for (int j : grid[i])
                 h[i] = Math.max(h[i], j);
         for (int i = 0; i < grid[0].length; i++)
-            for (int j = 0; j < grid.length; j++)
-                w[i] = Math.max(grid[j][i], w[i]);
+            for (int[] ints : grid)
+                w[i] = Math.max(ints[i], w[i]);
         for (int i = 0; i < grid.length; i++)
             for (int j = 0; j < grid[0].length; j++)
                 c += (Math.min(h[i], w[j]) - grid[i][j]);
@@ -3198,7 +3185,7 @@ class MinStack {
         return head.min;
     }
 
-    class Node {
+    static class Node {
         int val;
         int min;
         Node next;
@@ -3275,7 +3262,7 @@ class MyLinkedList {
         size--;
     }
 
-    private class Node {
+    private static class Node {
         int val;
         Node next;
 
@@ -3316,7 +3303,7 @@ class CQueue {
         return i;
     }
 
-    class MyQueue {
+    static class MyQueue {
         int val;
         MyQueue next;
 
