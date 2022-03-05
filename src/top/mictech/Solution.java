@@ -75,6 +75,16 @@ public class Solution {
 
     // region 一般题
 
+    // 1732. 找到最高海拔
+    public int largestAltitude(int[] gain) {
+        int ans = 0, h = 0;
+        for (int i : gain) {
+            h += i;
+            if (h > ans) ans = h;
+        }
+        return ans;
+    }
+
     // 967. 连续差相同的数字
     public int[] numsSameConsecDiff(int n, int k) {
         List<Integer> list = new ArrayList<>();
