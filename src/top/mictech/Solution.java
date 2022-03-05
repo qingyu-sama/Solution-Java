@@ -75,6 +75,31 @@ public class Solution {
 
     // region 一般题
 
+    // 967. 连续差相同的数字
+    public int[] numsSameConsecDiff(int n, int k) {
+        List<Integer> list = new ArrayList<>();
+        int i;
+        for (i = 1; i < 10; i++)
+            numsSameConsecDiffDFS(i, n, k, list);
+        int[] ans = new int[list.size()];
+        i = 0;
+        for (int s : list) ans[i++] = s;
+        return ans;
+    }
+
+    public void numsSameConsecDiffDFS(int a, int n, int k, List<Integer> list) {
+        if (n == 1) {
+            list.add(a);
+            return;
+        }
+        int t = a % 10;
+        int d1 = t + k;
+        int d2 = t - k;
+        n--;
+        if (d1 < 10) numsSameConsecDiffDFS(a * 10 + d1, n, k, list);
+        if (d2 >= 0 && d2 != d1) numsSameConsecDiffDFS(a * 10 + d2, n, k, list);
+    }
+
     // 1854. 人口最多的年份
     public int maximumPopulation(int[][] logs) {
         int[] time = new int[101];
