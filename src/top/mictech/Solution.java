@@ -75,6 +75,24 @@ public class Solution {
 
     // region 一般题
 
+    // 1854. 人口最多的年份
+    public int maximumPopulation(int[][] logs) {
+        int[] time = new int[101];
+        for (int[] is : logs) {
+            time[is[0] - 1950]++;
+            time[is[1] - 1950]--;
+        }
+        int ans = 0;
+        for (int i = 0, p = 0, max = -1; i < 101; i++) {
+            p += time[i];
+            if (p > max) {
+                ans = i;
+                max = p;
+            }
+        }
+        return ans + 1950;
+    }
+
     // 1054. 距离相等的条形码
     public int[] rearrangeBarcodes(int[] barcodes) {
         Map<Integer, Integer> map = new HashMap<>();
