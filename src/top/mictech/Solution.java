@@ -75,6 +75,32 @@ public class Solution {
 
     // region 一般题
 
+    // 1054. 距离相等的条形码
+    public int[] rearrangeBarcodes(int[] barcodes) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i : barcodes)
+            map.put(i, map.getOrDefault(i, 0) + 1);
+        PriorityQueue<int[]> priorityQueue = new PriorityQueue<>((a, b) -> b[1] - a[1]);
+        for (Map.Entry<Integer, Integer> entry : map.entrySet())
+            priorityQueue.add(new int[]{ entry.getKey(), entry.getValue()});
+        int len = barcodes.length;
+        for (int i = 0, t = -1; i < len; i++) {
+            int[] is = priorityQueue.poll();
+            if (is[0] == t) {
+                int[] ts = priorityQueue.poll();
+                barcodes[i] = ts[0];
+                ts[1]--;
+                priorityQueue.add(ts);
+            } else {
+                barcodes[i] = is[0];
+                is[1]--;
+            }
+            t = barcodes[i];
+            priorityQueue.add(is);
+        }
+        return barcodes;
+    }
+
     // 521. 最长特殊序列 Ⅰ
     public int findLUSlength(String a, String b) {
         return a.equals(b) ? -1 : Math.max(a.length(), b.length());
