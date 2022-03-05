@@ -2778,6 +2778,24 @@ public class Solution {
 
     // region 二叉树题
 
+    // 222. 完全二叉树的节点个数
+    public int countNodes(TreeNode root) {
+        if (root == null) return 0;
+        int l = countNodesD(root.left);
+        int r = countNodesD(root.right);
+        if (l == r) return countNodes(root.right) + (1 << l);
+        return countNodes(root.left) + (1 << r);
+    }
+
+    private int countNodesD(TreeNode root) {
+        int s = 0;
+        while (root != null) {
+            s++;
+            root = root.left;
+        }
+        return s;
+    }
+
     // 257. 二叉树的所有路径
     public List<String> binaryTreePaths(TreeNode root) {
         List<String> list = new LinkedList<>();
