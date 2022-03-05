@@ -75,6 +75,11 @@ public class Solution {
 
     // region 一般题
 
+    // 521. 最长特殊序列 Ⅰ
+    public int findLUSlength(String a, String b) {
+        return a.equals(b) ? -1 : Math.max(a.length(), b.length());
+    }
+
     // 2104. 子数组范围和
     public long subArrayRanges(int[] nums) {
         long ans = 0;
@@ -405,11 +410,21 @@ public class Solution {
         int[] is = new int[5];
         for (int i = 0; i < text.length(); i++)
             switch (text.charAt(i)) {
-                case 'b' -> is[0]++;
-                case 'a' -> is[1]++;
-                case 'l' -> is[2]++;
-                case 'o' -> is[3]++;
-                case 'n' -> is[4]++;
+                case 'b':
+                    is[0]++;
+                    break;
+                case 'a':
+                    is[1]++;
+                    break;
+                case 'l':
+                    is[2]++;
+                    break;
+                case 'o':
+                    is[3]++;
+                    break;
+                case 'n':
+                    is[4]++;
+                    break;
             }
         is[2] >>= 1;
         is[3] >>= 1;
