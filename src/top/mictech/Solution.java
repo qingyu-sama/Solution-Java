@@ -9,7 +9,7 @@ class test {
     public static void main(String[] args) {
         Solution solution = new Solution();
         long ns = System.nanoTime(), ms = System.currentTimeMillis();
-        System.out.println(solution.dominantIndex(new int[]{3, 6, 1, 0}));
+        System.out.println(solution.goodDaysToRobBank(new int[]{1,2,5,4,1,0,2,4,5,3,1,2,4,3,2,4,8}, 2));
         ns = System.nanoTime() - ns;
         ms = System.currentTimeMillis() - ms;
         System.out.println(ms);
@@ -74,6 +74,11 @@ public class Solution {
     private static final int[][] VECTOR = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
 
     // region 一般题
+
+    // 504. 七进制数
+    public String convertToBase7(int num) {
+        return Integer.toString(num, 7);
+    }
 
     // 1732. 找到最高海拔
     public int largestAltitude(int[] gain) {
