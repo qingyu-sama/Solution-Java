@@ -9,7 +9,7 @@ class test {
     public static void main(String[] args) {
         Solution solution = new Solution();
         long ns = System.nanoTime(), ms = System.currentTimeMillis();
-        System.out.println(solution.goodDaysToRobBank(new int[]{1,2,5,4,1,0,2,4,5,3,1,2,4,3,2,4,8}, 2));
+        System.out.println();
         ns = System.nanoTime() - ns;
         ms = System.currentTimeMillis() - ms;
         System.out.println(ms);
@@ -74,6 +74,11 @@ public class Solution {
     private static final int[][] VECTOR = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
 
     // region 一般题
+
+    // 836. 矩形重叠
+    public boolean isRectangleOverlap(int[] rec1, int[] rec2) {
+        return (Math.min(rec1[2], rec2[2]) > Math.max(rec1[0], rec2[0]) && Math.min(rec1[3], rec2[3]) > Math.max(rec1[1], rec2[1]));
+    }
 
     // 504. 七进制数
     public String convertToBase7(int num) {
